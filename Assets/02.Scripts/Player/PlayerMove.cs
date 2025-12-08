@@ -6,9 +6,18 @@ public class PlayerMove : MonoBehaviour
     // 필요 속성
     // - 이동속도
     public float MoveSpeed = 7;
+    private CharacterController _characterController;
+    public float Gravity = 9.81f;
+    private float _yVelocity;
+
+    private void Start()
+    {
+        _characterController = GetComponent<CharacterController>();
+    }
 
     private void Update()
     {
+        _yVelocity += Gravity * Time.deltaTime;
         // 1. 키보드 입력 받기
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
@@ -22,10 +31,10 @@ public class PlayerMove : MonoBehaviour
         direction.Normalize();
         // - 카메라가 쳐다보는 방향으로 변환한다. (월드 -> 로컬)
         direction = Camera.main.transform.TransformDirection(direction);
+        direction.y -= Gravity;
         
         
-        // 3. 방향으로 이동시키기  
-        transform.position += direction * MoveSpeed * Time.deltaTime;
+        _characterController.Move(direction * MoveSpeed * Time.deltaTime);
     }
     
 }
