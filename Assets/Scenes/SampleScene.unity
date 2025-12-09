@@ -794,7 +794,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isFPSMode: 1
   _fpsOffset: {x: 0, y: 0, z: 0}
-  _tpsOffset: {x: 0, y: 2, z: -5}
+  _tpsOffset: {x: 0, y: 2, z: -8}
   _transitionDuration: 0.5
 --- !u!1 &410087039
 GameObject:
