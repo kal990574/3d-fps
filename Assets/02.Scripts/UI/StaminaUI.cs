@@ -5,29 +5,29 @@ public class StaminaUI : MonoBehaviour
 {
     [SerializeField] private Slider _healthSlider;
     [SerializeField] private Slider _staminaSlider;
-    [SerializeField] private PlayerMove _playerMove;
+    [SerializeField] private PlayerStats _playerStats;
 
     private void Start()
     {
-        // PlayerMove를 자동으로 찾기 (할당 안 했을 경우)
-        if (_playerMove == null)
+        // PlayerStats를 자동으로 찾기 (할당 안 했을 경우)
+        if (_playerStats == null)
         {
-            _playerMove = FindObjectOfType<PlayerMove>();
+            _playerStats = FindObjectOfType<PlayerStats>();
         }
 
         // Slider 초기화
-        if (_playerMove != null)
+        if (_playerStats != null)
         {
             if (_healthSlider != null)
             {
-                _healthSlider.maxValue = _playerMove.MaxHealth;
-                _healthSlider.value = _playerMove.MaxHealth;
+                _healthSlider.maxValue = _playerStats.MaxHealth;
+                _healthSlider.value = _playerStats.MaxHealth;
             }
 
             if (_staminaSlider != null)
             {
-                _staminaSlider.maxValue = _playerMove.MaxStamina;
-                _staminaSlider.value = _playerMove.MaxStamina;
+                _staminaSlider.maxValue = _playerStats.MaxStamina;
+                _staminaSlider.value = _playerStats.MaxStamina;
             }
         }
     }
@@ -35,16 +35,16 @@ public class StaminaUI : MonoBehaviour
     private void Update()
     {
         // 체력과 스태미나 값을 Slider에 반영
-        if (_playerMove != null)
+        if (_playerStats != null)
         {
             if (_healthSlider != null)
             {
-                _healthSlider.value = _playerMove.CurrentHealth;
+                _healthSlider.value = _playerStats.CurrentHealth;
             }
 
             if (_staminaSlider != null)
             {
-                _staminaSlider.value = _playerMove.CurrentStamina;
+                _staminaSlider.value = _playerStats.CurrentStamina;
             }
         }
     }

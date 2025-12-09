@@ -1,6 +1,5 @@
 using UnityEngine;
 
-// 키보드를 누르면 캐릭터를 그 방향으로 이동 시키고 싶다.
 public class PlayerMove : MonoBehaviour
 {
     // 이동 관련
@@ -13,29 +12,25 @@ public class PlayerMove : MonoBehaviour
     // 점프 관련
     [Header("Jump")]
     public float JumpPower = 10f;
-    public float DoubleJumpStaminaCost = 25f; // 2단 점프 스태미나 소모량
+    public float DoubleJumpStaminaCost = 25f;
     private int _jumpCount = 0;
 
-    // 스태미나 관련
-    [Header("Stamina")]
-    public float MaxStamina = 100f;
-    public float StaminaDrainRate = 20f;    // 초당 소모량
-    public float StaminaRecoveryRate = 10f; // 초당 회복량
+    // 달리기 관련
+    [Header("Sprint")]
+    public float StaminaDrainRate = 20f;
 
-    private float _currentStamina;
-    public float CurrentStamina => _currentStamina; // UI에서 접근용
-
-    // 체력 관련
-    [Header("Health")]
-    public float MaxHealth = 100f;
-    private float _currentHealth;
-    public float CurrentHealth => _currentHealth; // UI에서 접근용
+    // 컴포넌트 참조
+    private PlayerStats _playerStats;
 
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
-        _currentStamina = MaxStamina;
-        _currentHealth = MaxHealth;
+        _playerStats = GetComponent<PlayerStats>();
+
+        if (_playerStats == null)
+        {
+            Debug.LogError("PlayerStats component not found!");
+        }
     }
 
     private void Update()
@@ -46,7 +41,7 @@ public class PlayerMove : MonoBehaviour
         if (isGrounded)
         {
             _yVelocity = 0;
-            _jumpCount = 0; // 땅에 닿으면 점프 카운트 리셋
+            _jumpCount = 0;
         }
         else
         {
@@ -67,38 +62,33 @@ public class PlayerMove : MonoBehaviour
                 _yVelocity = JumpPower;
                 _jumpCount = 1;
             }
-            else if (_jumpCount == 1 && _currentStamina >= DoubleJumpStaminaCost)
+            else if (_jumpCount == 1 && _playerStats.HasStamina(DoubleJumpStaminaCost))
             {
                 // 2단 점프 (스태미나 소모 O)
-                _yVelocity = JumpPower;
-                _currentStamina -= DoubleJumpStaminaCost;
-                _jumpCount = 2;
+                if (_playerStats.TryUseStamina(DoubleJumpStaminaCost))
+                {
+                    _yVelocity = JumpPower;
+                    _jumpCount = 2;
+                }
             }
         }
 
         // 3. 달리기 입력 확인
         bool wantsToSprint = Input.GetKey(KeyCode.LeftShift);
-        bool isSprinting = wantsToSprint && isMoving && _currentStamina > 0;
+        bool isSprinting = wantsToSprint && isMoving && _playerStats.HasStamina(0.1f);
 
         // 4. 스태미나 처리
         if (isSprinting)
         {
             // 달리는 중 - 스태미나 소모
-            _currentStamina -= StaminaDrainRate * Time.deltaTime;
-            _currentStamina = Mathf.Max(_currentStamina, 0);
+            _playerStats.UseStamina(StaminaDrainRate, Time.deltaTime);
         }
-        else
-        {
-            // 달리지 않음 - 스태미나 회복
-            _currentStamina += StaminaRecoveryRate * Time.deltaTime;
-            _currentStamina = Mathf.Min(_currentStamina, MaxStamina);
-        }
+        // 달리지 않을 때는 PlayerStats에서 자동 회복
 
         // 5. 이동 속도 결정
         float currentSpeed = isSprinting ? SprintSpeed : MoveSpeed;
 
         // 6. 입력에 따른 방향 구하기
-        // 카메라의 전방/우측 벡터 get
         Vector3 forward = Camera.main.transform.forward;
         Vector3 right = Camera.main.transform.right;
         forward.y = 0;
