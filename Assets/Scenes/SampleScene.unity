@@ -762,7 +762,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec41a053b87562449052213b8196f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 150
+  MouseSensitivity: 2
+  MaxVerticalAngle: 90
+  MinVerticalAngle: -90
 --- !u!114 &330585549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1943,6 +1945,19 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2039299742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039299735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016731bdf0e6a5440a57a31ff26b65f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotationSpeed: 200
 --- !u!1001 &6789727374167282836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1957,7 +1972,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 276341987637543322, guid: 78114e439ad0c0c489001138c22990da, type: 3}
       propertyPath: JumpPower
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1670335538538772970, guid: 78114e439ad0c0c489001138c22990da, type: 3}
       propertyPath: m_Name
@@ -2010,6 +2025,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1670335538538772970, guid: 78114e439ad0c0c489001138c22990da, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2039299741}
+    - targetCorrespondingSourceObject: {fileID: 1670335538538772970, guid: 78114e439ad0c0c489001138c22990da, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2039299742}
   m_SourcePrefab: {fileID: 100100000, guid: 78114e439ad0c0c489001138c22990da, type: 3}
 --- !u!1001 &7974783836126878353
 PrefabInstance:

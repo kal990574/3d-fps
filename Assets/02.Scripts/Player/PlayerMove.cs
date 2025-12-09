@@ -98,13 +98,21 @@ public class PlayerMove : MonoBehaviour
         float currentSpeed = isSprinting ? SprintSpeed : MoveSpeed;
 
         // 6. 입력에 따른 방향 구하기
-        Vector3 direction = new Vector3(x, 0, y);
-        direction.Normalize();
-        // 카메라가 쳐다보는 방향으로 변환
-        direction = Camera.main.transform.TransformDirection(direction);
-        direction.y = _yVelocity; // Y축은 점프/중력으로 처리
+        // 카메라의 전방/우측 벡터 get
+        Vector3 forward = Camera.main.transform.forward;
+        Vector3 right = Camera.main.transform.right;
+        forward.y = 0;
+        right.y = 0;
+        forward.Normalize();
+        right.Normalize();
 
-        // 7. 이동
-        _characterController.Move(direction * currentSpeed * Time.deltaTime);
+        // 이동 방향 계산
+        Vector3 moveDirection = (right * x + forward * y).normalized;
+
+        // 7. 수평,수직 분리
+        Vector3 movement = moveDirection * currentSpeed;
+        movement.y = _yVelocity;
+        
+        _characterController.Move(movement * Time.deltaTime);
     }
 }

@@ -2,19 +2,13 @@ using UnityEngine;
 
 public class PlayerRotate : MonoBehaviour
 {
-    public float RotationSpeed = 200f; // 0 ~ 360
-    private float _accumulationX = 0;
-
     private void Update()
     {
-        if (!Input.GetMouseButton(1))
+        // 플레이어를 카메라의 Y축 회전에 맞춤 (항상)
+        if (Camera.main != null)
         {
-            return;
+            float cameraYRotation = Camera.main.transform.eulerAngles.y;
+            transform.rotation = Quaternion.Euler(0, cameraYRotation, 0);
         }
-
-        float mouseX = Input.GetAxis("Mouse X");
-        _accumulationX += mouseX * RotationSpeed * Time.deltaTime; // 범위가 없다.
-        
-        transform.eulerAngles = new Vector3(0, _accumulationX);
     }
 }
