@@ -10,6 +10,12 @@ public class PlayerMove : MonoBehaviour
     public float Gravity = 9.81f;
     private float _yVelocity;
 
+    // 점프 관련
+    [Header("Jump")]
+    public float JumpPower = 10f;
+    public float DoubleJumpStaminaCost = 25f; // 2단 점프 스태미나 소모량
+    private int _jumpCount = 0;
+
     // 스태미나 관련
     [Header("Stamina")]
     public float MaxStamina = 100f;
@@ -19,26 +25,62 @@ public class PlayerMove : MonoBehaviour
     private float _currentStamina;
     public float CurrentStamina => _currentStamina; // UI에서 접근용
 
+    // 체력 관련
+    [Header("Health")]
+    public float MaxHealth = 100f;
+    private float _currentHealth;
+    public float CurrentHealth => _currentHealth; // UI에서 접근용
+
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
         _currentStamina = MaxStamina;
+        _currentHealth = MaxHealth;
     }
 
     private void Update()
     {
-        _yVelocity += Gravity * Time.deltaTime;
+        // 땅에 닿아있는지 체크
+        bool isGrounded = _characterController.isGrounded;
+
+        if (isGrounded)
+        {
+            _yVelocity = 0;
+            _jumpCount = 0; // 땅에 닿으면 점프 카운트 리셋
+        }
+        else
+        {
+            _yVelocity -= Gravity * Time.deltaTime;
+        }
 
         // 1. 키보드 입력 받기
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
         bool isMoving = x != 0 || y != 0;
 
-        // 2. 달리기 입력 확인
+        // 2. 점프 처리
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (_jumpCount == 0)
+            {
+                // 1단 점프 (스태미나 소모 X)
+                _yVelocity = JumpPower;
+                _jumpCount = 1;
+            }
+            else if (_jumpCount == 1 && _currentStamina >= DoubleJumpStaminaCost)
+            {
+                // 2단 점프 (스태미나 소모 O)
+                _yVelocity = JumpPower;
+                _currentStamina -= DoubleJumpStaminaCost;
+                _jumpCount = 2;
+            }
+        }
+
+        // 3. 달리기 입력 확인
         bool wantsToSprint = Input.GetKey(KeyCode.LeftShift);
         bool isSprinting = wantsToSprint && isMoving && _currentStamina > 0;
 
-        // 3. 스태미나 처리
+        // 4. 스태미나 처리
         if (isSprinting)
         {
             // 달리는 중 - 스태미나 소모
@@ -52,17 +94,17 @@ public class PlayerMove : MonoBehaviour
             _currentStamina = Mathf.Min(_currentStamina, MaxStamina);
         }
 
-        // 4. 이동 속도 결정
+        // 5. 이동 속도 결정
         float currentSpeed = isSprinting ? SprintSpeed : MoveSpeed;
 
-        // 5. 입력에 따른 방향 구하기
+        // 6. 입력에 따른 방향 구하기
         Vector3 direction = new Vector3(x, 0, y);
         direction.Normalize();
         // 카메라가 쳐다보는 방향으로 변환
         direction = Camera.main.transform.TransformDirection(direction);
-        direction.y -= Gravity;
+        direction.y = _yVelocity; // Y축은 점프/중력으로 처리
 
-        // 6. 이동
+        // 7. 이동
         _characterController.Move(direction * currentSpeed * Time.deltaTime);
     }
 }

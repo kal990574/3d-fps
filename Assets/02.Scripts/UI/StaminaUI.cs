@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class StaminaUI : MonoBehaviour
 {
+    [SerializeField] private Slider _healthSlider;
     [SerializeField] private Slider _staminaSlider;
     [SerializeField] private PlayerMove _playerMove;
 
@@ -15,19 +16,36 @@ public class StaminaUI : MonoBehaviour
         }
 
         // Slider 초기화
-        if (_staminaSlider != null && _playerMove != null)
+        if (_playerMove != null)
         {
-            _staminaSlider.maxValue = _playerMove.MaxStamina;
-            _staminaSlider.value = _playerMove.MaxStamina;
+            if (_healthSlider != null)
+            {
+                _healthSlider.maxValue = _playerMove.MaxHealth;
+                _healthSlider.value = _playerMove.MaxHealth;
+            }
+
+            if (_staminaSlider != null)
+            {
+                _staminaSlider.maxValue = _playerMove.MaxStamina;
+                _staminaSlider.value = _playerMove.MaxStamina;
+            }
         }
     }
 
     private void Update()
     {
-        // 스태미나 값을 Slider에 반영
-        if (_staminaSlider != null && _playerMove != null)
+        // 체력과 스태미나 값을 Slider에 반영
+        if (_playerMove != null)
         {
-            _staminaSlider.value = _playerMove.CurrentStamina;
+            if (_healthSlider != null)
+            {
+                _healthSlider.value = _playerMove.CurrentHealth;
+            }
+
+            if (_staminaSlider != null)
+            {
+                _staminaSlider.value = _playerMove.CurrentStamina;
+            }
         }
     }
 }
