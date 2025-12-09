@@ -776,6 +776,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _noseTransform: {fileID: 1502578696}
+  _isFPSMode: 1
+  _fpsOffset: {x: 0, y: 0, z: 0}
+  _tpsOffset: {x: 0, y: 2, z: -5}
+  _transitionDuration: 0.5
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,7 +1288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c76465ee6dc51d14f833b8fc7606152a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthSlider: {fileID: 0}
+  _healthSlider: {fileID: 1248175339}
   _staminaSlider: {fileID: 114667964}
   _playerMove: {fileID: 2039299740}
 --- !u!1 &867739972
