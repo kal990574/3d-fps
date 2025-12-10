@@ -4,14 +4,9 @@ public class Bomb : MonoBehaviour
 {
     [Header("Explosion Settings")]
     [SerializeField] private float _explosionDelay = 10f;
-    [SerializeField] private float _explosionRadius = 5f;
-    [SerializeField] private float _explosionDamage = 50f;
-    [SerializeField] private LayerMask _damageLayer;
-
-    [Header("Effects")]
-    [SerializeField] private GameObject _explosionEffectPrefab;
 
     private Rigidbody _rigidbody;
+    private IEffectPool _explosionEffectPool;
     private IBombPool _pool;
     private float _timer;
     private bool _hasExploded;
@@ -30,6 +25,11 @@ public class Bomb : MonoBehaviour
     public void Initialize(IBombPool pool)
     {
         _pool = pool;
+    }
+
+    public void SetExplosionEffectPool(IEffectPool effectPool)
+    {
+        _explosionEffectPool = effectPool;
     }
 
     public void ResetState()
@@ -100,13 +100,7 @@ public class Bomb : MonoBehaviour
     {
         _hasExploded = true;
 
-        BombExplosion.Execute(
-            transform.position,
-            _explosionRadius,
-            _explosionDamage,
-            _damageLayer,
-            _explosionEffectPrefab
-        );
+        BombExplosion.Execute(transform.position, _explosionEffectPool);
 
         ReturnToPool();
     }

@@ -9,6 +9,9 @@ public class PlayerBombFire : MonoBehaviour
     [SerializeField] private Transform _firePoint;
     [SerializeField] private float _throwForce = 15f;
 
+    [Header("Effects")]
+    [SerializeField] private ExplosionEffectPool _explosionEffectPool;
+
     [Header("Cooldown")]
     [SerializeField] private float _fireCooldown = 0.5f;
 
@@ -70,6 +73,8 @@ public class PlayerBombFire : MonoBehaviour
         {
             return;
         }
+
+        bomb.SetExplosionEffectPool(_explosionEffectPool);
 
         Vector3 fireDirection = _mainCamera.transform.forward;
         bomb.Launch(fireDirection, _throwForce);
