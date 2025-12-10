@@ -4,8 +4,8 @@ public class CameraShake : MonoBehaviour
 {
     [Header("Shake Settings")]
     [SerializeField] private float _maxShakeAngle = 2f;
-    [SerializeField] private float _frequency = 25f;
-    [SerializeField] private float _traumaDecay = 1.5f;
+    [SerializeField] private float _frequency = 60f;
+    [SerializeField] private float _traumaDecay = 2.5f;
 
     private float _trauma;
     private float _seed;

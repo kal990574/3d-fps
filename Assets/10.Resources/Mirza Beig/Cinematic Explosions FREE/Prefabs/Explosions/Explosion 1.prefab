@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7522982781472501600, guid: 017c9fcd02ca72049806a4014da0bea6, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7522982781472501600, guid: 017c9fcd02ca72049806a4014da0bea6, type: 3}
       propertyPath: SubModule.subEmitters.Array.data[0].emitter
