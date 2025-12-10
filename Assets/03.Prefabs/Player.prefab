@@ -17,9 +17,10 @@ GameObject:
   - component: {fileID: 4027189999850738501}
   - component: {fileID: 6013324769198919608}
   - component: {fileID: 1380718866570747641}
+  - component: {fileID: 6779593040222286972}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,10 +200,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f86e6b2b8063d4ca7874942b144318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bombPrefab: {fileID: 4839941086019710063, guid: 88639bfebb608cc4b82776c2e0b51ebc, type: 3}
+  _bombPool: {fileID: 0}
   _firePoint: {fileID: 3593426123889771962}
   _throwForce: 15
   _fireCooldown: 0.5
+--- !u!114 &6779593040222286972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670335538538772970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2c8aca8f54d3744803b0066268610c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fireTransform: {fileID: 3593426123889771962}
+  _hitEffectPrefab: {fileID: 19800002, guid: 54dd9cb5740188a488b8baebbf19207c, type: 3}
 --- !u!1 &4404966909852840755
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +231,7 @@ GameObject:
   - component: {fileID: 7173303734661152249}
   m_Layer: 0
   m_Name: Nose
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -300,7 +315,7 @@ GameObject:
   - component: {fileID: 3593426123889771962}
   m_Layer: 0
   m_Name: FirePoint
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
