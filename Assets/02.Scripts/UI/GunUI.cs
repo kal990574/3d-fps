@@ -47,7 +47,7 @@ public class GunUI : MonoBehaviour
 
     private void UpdateAmmoText()
     {
-        _ammoText.text = $"{_magazine.CurrentAmmo} / {_magazine.ReserveAmmo}";
+        _ammoText.text = $"{_magazine.CurrentAmmo} | {_magazine.ReserveAmmo}";
     }
 
     private void ShowReloadUI()

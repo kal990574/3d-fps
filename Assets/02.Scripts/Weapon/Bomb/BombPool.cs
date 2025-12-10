@@ -46,6 +46,11 @@ public class BombPool : MonoBehaviour, IBombPool
 
     public void Release(Bomb bomb)
     {
+        if (!bomb.gameObject.activeInHierarchy)
+        {
+            return;
+        }
+        
         _pool.Release(bomb);
     }
 

@@ -98,6 +98,10 @@ public class Bomb : MonoBehaviour
 
     private void Explode()
     {
+        if (_hasExploded)
+        {
+            return;
+        }
         _hasExploded = true;
 
         BombExplosion.Execute(transform.position, _explosionEffectPool);
@@ -107,12 +111,17 @@ public class Bomb : MonoBehaviour
 
     private void ReturnToPool()
     {
-        if (_pool != null)
+        if (_pool == null)
         {
-            _pool.Release(this);
+            Destroy(gameObject);
             return;
         }
 
-        Destroy(gameObject);
+        if (!gameObject.activeInHierarchy)
+        {
+            return;
+        }
+        
+        _pool.Release(this);
     }
 }

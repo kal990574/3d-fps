@@ -7,8 +7,8 @@ public class CameraRotate : MonoBehaviour
     public float MaxVerticalAngle = 90f;
     public float MinVerticalAngle = -90f;
 
-    private float _rotationX;
-    private float _rotationY;
+    private float _pitch;
+    private float _yaw;
 
     private void Start()
     {
@@ -47,22 +47,22 @@ public class CameraRotate : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
-        _rotationX -= mouseY * MouseSensitivity;
-        _rotationY += mouseX * MouseSensitivity;
+        _pitch -= mouseY * MouseSensitivity;
+        _yaw += mouseX * MouseSensitivity;
 
-        _rotationX = Mathf.Clamp(_rotationX, MinVerticalAngle, MaxVerticalAngle);
+        _pitch = Mathf.Clamp(_pitch, MinVerticalAngle, MaxVerticalAngle);
     }
 
     private void ApplyRotation()
     {
-        transform.localRotation = Quaternion.Euler(_rotationX, _rotationY, 0f);
+        transform.localRotation = Quaternion.Euler(_pitch, _yaw, 0f);
     }
 
     public void ApplyRecoil(float verticalKick, float horizontalKick)
     {
-        _rotationX -= verticalKick;
-        _rotationY += horizontalKick;
+        _pitch -= verticalKick;
+        _yaw += horizontalKick;
 
-        _rotationX = Mathf.Clamp(_rotationX, MinVerticalAngle, MaxVerticalAngle);
+        _pitch = Mathf.Clamp(_pitch, MinVerticalAngle, MaxVerticalAngle);
     }
 }
