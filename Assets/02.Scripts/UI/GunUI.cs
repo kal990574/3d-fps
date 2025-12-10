@@ -5,7 +5,7 @@ using TMPro;
 public class GunUI : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private Gun _gun;
+    [SerializeField] private Magazine _magazine;
 
     [Header("Ammo UI")]
     [SerializeField] private TextMeshProUGUI _ammoText;
@@ -33,21 +33,21 @@ public class GunUI : MonoBehaviour
 
     private void SubscribeEvents()
     {
-        _gun.OnAmmoChanged += UpdateAmmoText;
-        _gun.OnReloadStart += ShowReloadUI;
-        _gun.OnReloadComplete += HideReloadUI;
+        _magazine.OnAmmoChanged += UpdateAmmoText;
+        _magazine.OnReloadStart += ShowReloadUI;
+        _magazine.OnReloadComplete += HideReloadUI;
     }
 
     private void UnsubscribeEvents()
     {
-        _gun.OnAmmoChanged -= UpdateAmmoText;
-        _gun.OnReloadStart -= ShowReloadUI;
-        _gun.OnReloadComplete -= HideReloadUI;
+        _magazine.OnAmmoChanged -= UpdateAmmoText;
+        _magazine.OnReloadStart -= ShowReloadUI;
+        _magazine.OnReloadComplete -= HideReloadUI;
     }
 
     private void UpdateAmmoText()
     {
-        _ammoText.text = $"{_gun.CurrentAmmo} / {_gun.ReserveAmmo}";
+        _ammoText.text = $"{_magazine.CurrentAmmo} / {_magazine.ReserveAmmo}";
     }
 
     private void ShowReloadUI()
@@ -63,9 +63,9 @@ public class GunUI : MonoBehaviour
 
     private void UpdateReloadProgress()
     {
-        if (_gun.IsReloading)
+        if (_magazine.IsReloading)
         {
-            _reloadSlider.value = _gun.ReloadProgress;
+            _reloadSlider.value = _magazine.ReloadProgress;
         }
     }
 }

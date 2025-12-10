@@ -1308,7 +1308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05fea02982c79b248900baefa1c09e30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gun: {fileID: 1311150275}
+  _magazine: {fileID: 1311150276}
   _ammoText: {fileID: 187047893}
   _reloadSlider: {fileID: 314405403}
   _reloadPanel: {fileID: 1430066792}
@@ -2157,54 +2157,17 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &1311150273
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1311150274}
-  - component: {fileID: 1311150275}
-  m_Layer: 0
-  m_Name: Gun
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1311150274
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1311150273}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6789727374167282846}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1311150275
+--- !u!114 &1311150276 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 715682834838266593, guid: 78114e439ad0c0c489001138c22990da, type: 3}
+  m_PrefabInstance: {fileID: 6789727374167282836}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1311150273}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 051b36e4b30fc0643b9833cdb1e7f4b9, type: 3}
+  m_Script: {fileID: 11500000, guid: ea83db81f0fdeb74081cdbdd010b340a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fireCooldown: 0.1
-  _magazineSize: 30
-  _startingMagazines: 5
-  _reloadTime: 1.6
 --- !u!1 &1361996704
 GameObject:
   m_ObjectHideFlags: 0
@@ -3220,18 +3183,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1408213071}
     - target: {fileID: 1380718866570747641, guid: 78114e439ad0c0c489001138c22990da, type: 3}
-      propertyPath: _firePoint
-      value: 
-      objectReference: {fileID: 1502578696}
-    - target: {fileID: 1380718866570747641, guid: 78114e439ad0c0c489001138c22990da, type: 3}
-      propertyPath: _throwForce
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 1380718866570747641, guid: 78114e439ad0c0c489001138c22990da, type: 3}
-      propertyPath: _explosionEffect
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1380718866570747641, guid: 78114e439ad0c0c489001138c22990da, type: 3}
       propertyPath: _explosionEffectPool
       value: 
       objectReference: {fileID: 446009041}
@@ -3280,10 +3231,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6779593040222286972, guid: 78114e439ad0c0c489001138c22990da, type: 3}
-      propertyPath: _gun
-      value: 
-      objectReference: {fileID: 1311150275}
-    - target: {fileID: 6779593040222286972, guid: 78114e439ad0c0c489001138c22990da, type: 3}
       propertyPath: _hitEffect
       value: 
       objectReference: {fileID: 1205758333}
@@ -3292,19 +3239,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 330585546}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 6874808268359432040, guid: 78114e439ad0c0c489001138c22990da, type: 3}
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2292504110922916621, guid: 78114e439ad0c0c489001138c22990da, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1311150274}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78114e439ad0c0c489001138c22990da, type: 3}
---- !u!4 &6789727374167282846 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2292504110922916621, guid: 78114e439ad0c0c489001138c22990da, type: 3}
-  m_PrefabInstance: {fileID: 6789727374167282836}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7974783836126878353
 PrefabInstance:
   m_ObjectHideFlags: 0
