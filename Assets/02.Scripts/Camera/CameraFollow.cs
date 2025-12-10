@@ -7,7 +7,6 @@ public class CameraFollow : MonoBehaviour
 
     private void Start()
     {
-        // CameraModeSwitch를 자동으로 찾기 (할당 안 했을 경우)
         if (_modeSwitch == null)
         {
             _modeSwitch = GetComponent<CameraModeSwitch>();
