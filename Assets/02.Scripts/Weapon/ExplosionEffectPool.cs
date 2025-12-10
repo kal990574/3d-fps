@@ -6,7 +6,7 @@ public class ExplosionEffectPool : MonoBehaviour, IEffectPool
 {
     [Header("Pool Settings")]
     [SerializeField] private ParticleSystem _effectPrefab;
-    [SerializeField] private int _maxPoolSize = 5;
+    [SerializeField] private int _maxPoolSize = 10;
 
     private ObjectPool<ParticleSystem> _pool;
 

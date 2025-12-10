@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerGunFire : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private Gun _gun;
     [SerializeField] private Transform _fireTransform;
     [SerializeField] private ParticleSystem _hitEffect;
 
@@ -14,13 +16,28 @@ public class PlayerGunFire : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        HandleFireInput();
+        HandleReloadInput();
+    }
+
+    private void HandleFireInput()
+    {
+        if (Input.GetMouseButton(0) && _gun.CanFire())
         {
-            Fire();
+            _gun.Fire();
+            PerformRaycast();
         }
     }
 
-    private void Fire()
+    private void HandleReloadInput()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            _gun.StartReload();
+        }
+    }
+
+    private void PerformRaycast()
     {
         Ray ray = new Ray(_fireTransform.position, _mainCamera.transform.forward);
 
