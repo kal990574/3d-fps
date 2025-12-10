@@ -881,6 +881,7 @@ GameObject:
   - component: {fileID: 330585547}
   - component: {fileID: 330585549}
   - component: {fileID: 330585550}
+  - component: {fileID: 330585551}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1051,6 +1052,21 @@ MonoBehaviour:
   _fpsOffset: {x: 0, y: 0, z: 0}
   _tpsOffset: {x: 0, y: 2, z: -8}
   _transitionDuration: 0.5
+--- !u!114 &330585551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e601fe6123a71904cb70e4f3f638c988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxShakeAngle: 2
+  _frequency: 25
+  _traumaDecay: 1.5
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2157,17 +2173,38 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1311150273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4171201832200922133, guid: 78114e439ad0c0c489001138c22990da, type: 3}
+  m_PrefabInstance: {fileID: 6789727374167282836}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1311150276 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 715682834838266593, guid: 78114e439ad0c0c489001138c22990da, type: 3}
   m_PrefabInstance: {fileID: 6789727374167282836}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1311150273}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea83db81f0fdeb74081cdbdd010b340a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1311150277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311150273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c083f9e2d0ae54396f817101d923b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _verticalMin: 1
+  _verticalMax: 2
+  _horizontalMin: -0.5
+  _horizontalMax: 0.5
 --- !u!1 &1361996704
 GameObject:
   m_ObjectHideFlags: 0
@@ -2825,7 +2862,7 @@ GameObject:
   - component: {fileID: 1575661685}
   - component: {fileID: 1575661684}
   m_Layer: 5
-  m_Name: RawImage
+  m_Name: CrossHair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2841,7 +2878,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 841870414}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3231,9 +3268,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6779593040222286972, guid: 78114e439ad0c0c489001138c22990da, type: 3}
+      propertyPath: _recoil
+      value: 
+      objectReference: {fileID: 1311150277}
+    - target: {fileID: 6779593040222286972, guid: 78114e439ad0c0c489001138c22990da, type: 3}
       propertyPath: _hitEffect
       value: 
       objectReference: {fileID: 1205758333}
+    - target: {fileID: 6779593040222286972, guid: 78114e439ad0c0c489001138c22990da, type: 3}
+      propertyPath: _cameraShake
+      value: 
+      objectReference: {fileID: 330585551}
+    - target: {fileID: 6779593040222286972, guid: 78114e439ad0c0c489001138c22990da, type: 3}
+      propertyPath: _cameraRotate
+      value: 
+      objectReference: {fileID: 330585548}
     - target: {fileID: 6779593040222286972, guid: 78114e439ad0c0c489001138c22990da, type: 3}
       propertyPath: _fireTransform
       value: 
@@ -3241,7 +3290,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4171201832200922133, guid: 78114e439ad0c0c489001138c22990da, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1311150277}
   m_SourcePrefab: {fileID: 100100000, guid: 78114e439ad0c0c489001138c22990da, type: 3}
 --- !u!1001 &7974783836126878353
 PrefabInstance:
@@ -3335,7 +3387,7 @@ SceneRoots:
   - {fileID: 841870414}
   - {fileID: 1489451362}
   - {fileID: 91783846}
-  - {fileID: 1205758332}
-  - {fileID: 446009040}
   - {fileID: 1408213069}
+  - {fileID: 446009040}
+  - {fileID: 1205758332}
   - {fileID: 683120724}

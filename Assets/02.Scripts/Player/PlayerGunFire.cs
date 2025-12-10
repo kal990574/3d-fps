@@ -6,6 +6,12 @@ public class PlayerGunFire : MonoBehaviour
     [SerializeField] private Gun _gun;
     [SerializeField] private Transform _fireTransform;
     [SerializeField] private ParticleSystem _hitEffect;
+    [SerializeField] private Recoil _recoil;
+    [SerializeField] private CameraRotate _cameraRotate;
+    [SerializeField] private CameraShake _cameraShake;
+
+    [Header("Shake Settings")]
+    [SerializeField] private float _fireTrauma = 0.2f;
 
     private Camera _mainCamera;
 
@@ -26,7 +32,20 @@ public class PlayerGunFire : MonoBehaviour
         {
             _gun.Fire();
             PerformRaycast();
+            ApplyRecoil();
+            ApplyShake();
         }
+    }
+
+    private void ApplyRecoil()
+    {
+        Vector2 recoil = _recoil.GetRecoil();
+        _cameraRotate.ApplyRecoil(recoil.x, recoil.y);
+    }
+
+    private void ApplyShake()
+    {
+        _cameraShake.AddTrauma(_fireTrauma);
     }
 
     private void HandleReloadInput()
