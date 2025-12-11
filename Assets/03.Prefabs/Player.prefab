@@ -161,8 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c94892a2af5a4d540a25624497adedc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 7
-  SprintSpeed: 12
+  MoveSpeed: 4
+  SprintSpeed: 8
   Gravity: 9.81
   JumpPower: 7
   DoubleJumpStaminaCost: 25
@@ -307,6 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fireCooldown: 0.1
+  _damage: 25
   _magazine: {fileID: 715682834838266593}
 --- !u!114 &715682834838266593
 MonoBehaviour:
@@ -452,14 +453,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4420072641762177921}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.16082712, y: -0.11786984, z: -0.0008634946, w: 0.97991866}
-  m_LocalPosition: {x: 0.238, y: 0.318, z: 0.334}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1.0235475}
+  m_LocalRotation: {x: -0.12139104, y: -0.117809616, z: 0.0038652134, w: 0.98558116}
+  m_LocalPosition: {x: 0.155, y: 0.305, z: 0.186}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.9707632}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5967660396109134331}
   m_Father: {fileID: 7541853976441280221}
-  m_LocalEulerAnglesHint: {x: -18.385, y: -14.072, z: 2.187}
+  m_LocalEulerAnglesHint: {x: -13.79, y: -13.891, z: 2.137}
 --- !u!33 &7869125293186530783
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -475,7 +476,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4420072641762177921}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

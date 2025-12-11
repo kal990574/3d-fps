@@ -90,10 +90,20 @@ public class PlayerGunFire : MonoBehaviour
         {
             Debug.DrawLine(_fireTransform.position, hit.point, Color.red, 0.5f);
             PlayHitEffect(hit);
+            ApplyDamage(hit);
         }
         else
         {
             Debug.DrawLine(_fireTransform.position, targetPoint, Color.gray, 0.5f);
+        }
+    }
+
+    private void ApplyDamage(RaycastHit hit)
+    {
+        IDamageable damageable = hit.collider.GetComponent<IDamageable>();
+        if (damageable != null)
+        {
+            damageable.TakeDamage(_gun.Damage);
         }
     }
 

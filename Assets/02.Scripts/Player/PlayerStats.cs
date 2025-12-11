@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : MonoBehaviour, IDamageable
 {
     [Header("Health")]
     public float MaxHealth = 100f;
@@ -52,5 +52,16 @@ public class PlayerStats : MonoBehaviour
     public bool HasStamina(float amount)
     {
         return _currentStamina >= amount;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        _currentHealth -= damage;
+        _currentHealth = Mathf.Max(_currentHealth, 0);
+
+        if (_currentHealth <= 0)
+        {
+            Debug.Log("플레이어 사망!");
+        }
     }
 }

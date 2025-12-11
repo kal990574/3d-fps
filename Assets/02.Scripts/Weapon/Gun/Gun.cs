@@ -4,6 +4,7 @@ public class Gun : MonoBehaviour
 {
     [Header("Fire Settings")]
     [SerializeField] private float _fireCooldown = 0.1f;
+    [SerializeField] private float _damage = 25f;
 
     [Header("References")]
     [SerializeField] private Magazine _magazine;
@@ -11,6 +12,7 @@ public class Gun : MonoBehaviour
     private float _nextFireTime;
 
     public Magazine Magazine => _magazine;
+    public float Damage => _damage;
 
     public bool CanFire()
     {
