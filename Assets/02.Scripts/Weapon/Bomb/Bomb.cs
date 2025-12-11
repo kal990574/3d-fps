@@ -4,6 +4,9 @@ public class Bomb : MonoBehaviour
 {
     [Header("Explosion Settings")]
     [SerializeField] private float _explosionDelay = 10f;
+    [SerializeField] private float _explosionRadius = 5f;
+    [SerializeField] private float _explosionDamage = 100f;
+    [SerializeField] private LayerMask _hitLayers;
 
     private Rigidbody _rigidbody;
     private IEffectPool _explosionEffectPool;
@@ -104,6 +107,13 @@ public class Bomb : MonoBehaviour
         }
         _hasExploded = true;
 
+        ExplosionData explosionData = new ExplosionData(
+            transform.position,
+            _explosionRadius,
+            _explosionDamage,
+            _hitLayers
+        );
+        ExplosionDamage.Explode(explosionData);
         BombExplosion.Execute(transform.position, _explosionEffectPool);
 
         ReturnToPool();

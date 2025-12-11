@@ -123,6 +123,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosionDelay: 10
+  _explosionRadius: 5
+  _explosionDamage: 100
+  _hitLayers:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!54 &2679637542335060871
 Rigidbody:
   m_ObjectHideFlags: 0
