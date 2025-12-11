@@ -257,23 +257,37 @@ public class Monster : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage)
     {
-        if (State == EMonsterState.Hit || State == EMonsterState.Death)
+        // Death 상태에서만 데미지 무시
+        if (State == EMonsterState.Death)
         {
             return;
         }
 
+        // 체력 감소는 항상 적용
         Health -= damage;
 
         if (Health > 0)
         {
-            Debug.Log($"상태 전환: {State} -> Hit (데미지: {damage})");
-            State = EMonsterState.Hit;
-            StartCoroutine(Hit_Coroutine());
+            // Hit 상태가 아닐 때만 넉백 시작
+            if (State != EMonsterState.Hit)
+            {
+                Debug.Log($"상태 전환: {State} -> Hit (데미지: {damage})");
+                State = EMonsterState.Hit;
+                StartCoroutine(Hit_Coroutine());
+            }
+            else
+            {
+                // Hit 상태에서는 데미지만 받고 넉백은 중복 안함
+                Debug.Log($"Hit 상태 중 추가 데미지: {damage} (남은 체력: {Health})");
+            }
         }
         else
         {
             Debug.Log($"상태 전환: {State} -> Death (데미지: {damage})");
             State = EMonsterState.Death;
+
+            // Hit 코루틴이 실행 중이면 중단하고 Death로 전환
+            StopAllCoroutines();
             StartCoroutine(Death_Coroutine());
         }
     }
