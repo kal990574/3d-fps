@@ -10,6 +10,10 @@ public class PlayerGunFire : MonoBehaviour
     [SerializeField] private CameraRotate _cameraRotate;
     [SerializeField] private CameraShake _cameraShake;
 
+    [Header("Raycast Settings")]
+    [SerializeField] private LayerMask _hitLayers;
+    [SerializeField] private float _maxRayDistance = 1000f;
+
     [Header("Shake Settings")]
     [SerializeField] private float _fireTrauma = 0.2f;
 
@@ -58,11 +62,38 @@ public class PlayerGunFire : MonoBehaviour
 
     private void PerformRaycast()
     {
-        Ray ray = new Ray(_fireTransform.position, _mainCamera.transform.forward);
+        Vector3 targetPoint = GetCrosshairTargetPoint();
+        FireToTarget(targetPoint);
+    }
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo))
+    private Vector3 GetCrosshairTargetPoint()
+    {
+        Ray ray = _mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+
+        if (Physics.Raycast(ray, out RaycastHit hit, _maxRayDistance, _hitLayers, QueryTriggerInteraction.Ignore))
         {
-            PlayHitEffect(hitInfo);
+            Debug.DrawLine(_mainCamera.transform.position, hit.point, Color.blue, 0.5f);
+            return hit.point;
+        }
+
+        return ray.origin + ray.direction * _maxRayDistance;
+    }
+
+    private void FireToTarget(Vector3 targetPoint)
+    {
+        Vector3 fireDirection = (targetPoint - _fireTransform.position).normalized;
+        float maxDistance = Vector3.Distance(_fireTransform.position, targetPoint) + 1f;
+
+        Ray ray = new Ray(_fireTransform.position, fireDirection);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, maxDistance, _hitLayers, QueryTriggerInteraction.Ignore))
+        {
+            Debug.DrawLine(_fireTransform.position, hit.point, Color.red, 0.5f);
+            PlayHitEffect(hit);
+        }
+        else
+        {
+            Debug.DrawLine(_fireTransform.position, targetPoint, Color.gray, 0.5f);
         }
     }
 

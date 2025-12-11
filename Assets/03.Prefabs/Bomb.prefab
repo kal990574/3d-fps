@@ -123,12 +123,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosionDelay: 10
-  _explosionRadius: 5
-  _explosionDamage: 50
-  _damageLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  _explosionEffect: {fileID: 1007127540951276610, guid: 3ace37360f306cb4aac03640550fa9ef, type: 3}
 --- !u!54 &2679637542335060871
 Rigidbody:
   m_ObjectHideFlags: 0
