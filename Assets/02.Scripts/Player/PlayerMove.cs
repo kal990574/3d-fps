@@ -21,15 +21,22 @@ public class PlayerMove : MonoBehaviour
 
     // 컴포넌트 참조
     private PlayerStats _playerStats;
+    private Camera _mainCamera;
 
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
         _playerStats = GetComponent<PlayerStats>();
+        _mainCamera = Camera.main;
 
         if (_playerStats == null)
         {
             Debug.LogError("PlayerStats component not found!");
+        }
+
+        if (_mainCamera == null)
+        {
+            Debug.LogError("Main Camera not found!");
         }
     }
 
@@ -89,8 +96,8 @@ public class PlayerMove : MonoBehaviour
         float currentSpeed = isSprinting ? SprintSpeed : MoveSpeed;
 
         // 6. 입력에 따른 방향 구하기
-        Vector3 forward = Camera.main.transform.forward;
-        Vector3 right = Camera.main.transform.right;
+        Vector3 forward = _mainCamera.transform.forward;
+        Vector3 right = _mainCamera.transform.right;
         forward.y = 0;
         right.y = 0;
         forward.Normalize();
