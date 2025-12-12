@@ -128,11 +128,11 @@ MonoBehaviour:
   _player: {fileID: 1670335538538772970, guid: 78114e439ad0c0c489001138c22990da, type: 3}
   _controller: {fileID: 3657013618593052023}
   DetectDistance: 15
-  AttackDistance: 1
+  AttackDistance: 3
   MaxTraceDistance: 15
   MoveSpeed: 5
-  AttackSpeed: 2
-  AttackDamage: 10
+  AttackSpeed: 1
+  AttackDamage: 20
   PatrolRadius: 10
   PatrolIdleTime: 1.5
   ComebackStopDistance: 0.5

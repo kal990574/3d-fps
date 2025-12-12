@@ -4,7 +4,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 {
     [Header("Health")]
     public float MaxHealth = 100f;
-    private float _currentHealth;
+    [SerializeField] private float _currentHealth;
     public float CurrentHealth => _currentHealth;
 
     [Header("Stamina")]
@@ -58,6 +58,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     {
         _currentHealth -= damageInfo.Damage;
         _currentHealth = Mathf.Max(_currentHealth, 0);
+        Debug.Log(_currentHealth);
 
         if (_currentHealth <= 0)
         {
