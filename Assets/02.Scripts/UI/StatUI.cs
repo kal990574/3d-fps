@@ -5,49 +5,34 @@ public class StatUI : MonoBehaviour
 {
     [SerializeField] private Slider _healthSlider;
     [SerializeField] private Slider _staminaSlider;
-    [SerializeField] private PlayerStats _playerStats;
 
-    private void Start()
+    private void OnEnable()
     {
-        if (_playerStats == null)
-        {
-            Debug.LogError("[StatUI] PlayerStats reference is not assigned in Inspector!");
-            enabled = false;
-            return;
-        }
-
-        InitializeSliders();
+        GameEvents.OnHealthChanged += UpdateHealth;
+        GameEvents.OnStaminaChanged += UpdateStamina;
     }
 
-    private void InitializeSliders()
+    private void OnDisable()
+    {
+        GameEvents.OnHealthChanged -= UpdateHealth;
+        GameEvents.OnStaminaChanged -= UpdateStamina;
+    }
+
+    private void UpdateHealth(float current, float max)
     {
         if (_healthSlider != null)
         {
-            _healthSlider.maxValue = _playerStats.MaxHealth;
-            _healthSlider.value = _playerStats.MaxHealth;
-        }
-
-        if (_staminaSlider != null)
-        {
-            _staminaSlider.maxValue = _playerStats.MaxStamina;
-            _staminaSlider.value = _playerStats.MaxStamina;
+            _healthSlider.maxValue = max;
+            _healthSlider.value = current;
         }
     }
 
-    private void Update()
+    private void UpdateStamina(float current, float max)
     {
-        // 체력과 스태미나 값을 Slider에 반영
-        if (_playerStats != null)
+        if (_staminaSlider != null)
         {
-            if (_healthSlider != null)
-            {
-                _healthSlider.value = _playerStats.CurrentHealth;
-            }
-
-            if (_staminaSlider != null)
-            {
-                _staminaSlider.value = _playerStats.CurrentStamina;
-            }
+            _staminaSlider.maxValue = max;
+            _staminaSlider.value = current;
         }
     }
 }

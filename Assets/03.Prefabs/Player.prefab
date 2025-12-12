@@ -217,6 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
+  _currentHealth: 0
   MaxStamina: 100
   StaminaRecoveryRate: 10
 --- !u!114 &1380718866570747641
@@ -251,9 +252,13 @@ MonoBehaviour:
   _gun: {fileID: 922008891625935987}
   _fireTransform: {fileID: 5967660396109134331}
   _hitEffect: {fileID: 0}
-  _recoil: {fileID: 1376178213578236864}
   _cameraRotate: {fileID: 0}
   _cameraShake: {fileID: 0}
+  _recoil:
+    _verticalMin: 1
+    _verticalMax: 2
+    _horizontalMin: -0.5
+    _horizontalMax: 0.5
   _hitLayers:
     serializedVersion: 2
     m_Bits: 1939
@@ -270,7 +275,6 @@ GameObject:
   - component: {fileID: 7541853976441280221}
   - component: {fileID: 922008891625935987}
   - component: {fileID: 715682834838266593}
-  - component: {fileID: 1376178213578236864}
   m_Layer: 6
   m_Name: Gun
   m_TagString: Player
@@ -324,22 +328,6 @@ MonoBehaviour:
   _capacity: 30
   _startingMagazines: 5
   _reloadTime: 1.6
---- !u!114 &1376178213578236864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4171201832200922133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33c083f9e2d0ae54396f817101d923b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _verticalMin: 1
-  _verticalMax: 2
-  _horizontalMin: -0.5
-  _horizontalMax: 0.5
 --- !u!1 &4404966909852840755
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,33 +6,21 @@ public class BombUI : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI _bombCountText;
 
-    [Header("Reference")]
-    [SerializeField] private BombPool _bombPool;
-
-    private void Start()
+    private void OnEnable()
     {
-        if (_bombPool == null)
-        {
-            Debug.LogError("[BombUI] BombPool reference is not assigned in Inspector!");
-            enabled = false;
-            return;
-        }
-
-        UpdateUI();
+        GameEvents.OnBombCountChanged += UpdateBombCount;
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        UpdateUI();
+        GameEvents.OnBombCountChanged -= UpdateBombCount;
     }
 
-    private void UpdateUI()
+    private void UpdateBombCount(int available, int max)
     {
-        if (_bombPool == null || _bombCountText == null)
+        if (_bombCountText != null)
         {
-            return;
+            _bombCountText.text = $"{available} / {max}";
         }
-
-        _bombCountText.text = $"{_bombPool.AvailableCount} / {_bombPool.MaxPoolSize}";
     }
 }

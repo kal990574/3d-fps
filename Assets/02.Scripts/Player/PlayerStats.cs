@@ -17,6 +17,10 @@ public class PlayerStats : MonoBehaviour, IDamageable
     {
         _currentHealth = MaxHealth;
         _currentStamina = MaxStamina;
+
+        // 초기 상태 이벤트 발행
+        GameEvents.TriggerHealthChanged(_currentHealth, MaxHealth);
+        GameEvents.TriggerStaminaChanged(_currentStamina, MaxStamina);
     }
 
     private void Update()
@@ -31,6 +35,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         {
             _currentStamina -= amount;
             _currentStamina = Mathf.Max(_currentStamina, 0);
+            GameEvents.TriggerStaminaChanged(_currentStamina, MaxStamina);
             return true;
         }
         return false;
@@ -38,14 +43,26 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public void UseStamina(float amount, float deltaTime)
     {
+        float prevStamina = _currentStamina;
         _currentStamina -= amount * deltaTime;
         _currentStamina = Mathf.Max(_currentStamina, 0);
+
+        if (Mathf.Abs(prevStamina - _currentStamina) > 0.01f)
+        {
+            GameEvents.TriggerStaminaChanged(_currentStamina, MaxStamina);
+        }
     }
-    
+
     public void RecoverStamina(float deltaTime)
     {
+        float prevStamina = _currentStamina;
         _currentStamina += StaminaRecoveryRate * deltaTime;
         _currentStamina = Mathf.Min(_currentStamina, MaxStamina);
+
+        if (Mathf.Abs(prevStamina - _currentStamina) > 0.01f)
+        {
+            GameEvents.TriggerStaminaChanged(_currentStamina, MaxStamina);
+        }
     }
 
 
@@ -58,11 +75,12 @@ public class PlayerStats : MonoBehaviour, IDamageable
     {
         _currentHealth -= damageInfo.Damage;
         _currentHealth = Mathf.Max(_currentHealth, 0);
-        Debug.Log(_currentHealth);
+
+        GameEvents.TriggerHealthChanged(_currentHealth, MaxHealth);
 
         if (_currentHealth <= 0)
         {
-            Debug.Log("플레이어 사망!");
+            GameEvents.TriggerPlayerDeath();
         }
     }
 }
