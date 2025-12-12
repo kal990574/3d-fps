@@ -11,23 +11,26 @@ public class StatUI : MonoBehaviour
     {
         if (_playerStats == null)
         {
-            _playerStats = FindObjectOfType<PlayerStats>();
+            Debug.LogError("[StatUI] PlayerStats reference is not assigned in Inspector!");
+            enabled = false;
+            return;
         }
 
-        // Slider 초기화
-        if (_playerStats != null)
-        {
-            if (_healthSlider != null)
-            {
-                _healthSlider.maxValue = _playerStats.MaxHealth;
-                _healthSlider.value = _playerStats.MaxHealth;
-            }
+        InitializeSliders();
+    }
 
-            if (_staminaSlider != null)
-            {
-                _staminaSlider.maxValue = _playerStats.MaxStamina;
-                _staminaSlider.value = _playerStats.MaxStamina;
-            }
+    private void InitializeSliders()
+    {
+        if (_healthSlider != null)
+        {
+            _healthSlider.maxValue = _playerStats.MaxHealth;
+            _healthSlider.value = _playerStats.MaxHealth;
+        }
+
+        if (_staminaSlider != null)
+        {
+            _staminaSlider.maxValue = _playerStats.MaxStamina;
+            _staminaSlider.value = _playerStats.MaxStamina;
         }
     }
 

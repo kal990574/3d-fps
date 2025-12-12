@@ -13,7 +13,9 @@ public class BombUI : MonoBehaviour
     {
         if (_bombPool == null)
         {
-            _bombPool = FindObjectOfType<BombPool>();
+            Debug.LogError("[BombUI] BombPool reference is not assigned in Inspector!");
+            enabled = false;
+            return;
         }
 
         UpdateUI();
