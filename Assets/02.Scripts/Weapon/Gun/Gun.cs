@@ -1,34 +1,41 @@
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public abstract class Gun : MonoBehaviour, IWeapon
 {
+    [Header("Weapon Info")]
+    [SerializeField] protected string _weaponName = "Gun";
+
     [Header("Fire Settings")]
-    [SerializeField] private float _fireCooldown = 0.1f;
-    [SerializeField] private float _damage = 25f;
+    [SerializeField] protected float _fireCooldown = 0.1f;
+    [SerializeField] protected float _damage = 25f;
 
     [Header("References")]
-    [SerializeField] private Magazine _magazine;
+    [SerializeField] protected Magazine _magazine;
 
-    private float _nextFireTime;
+    protected float _nextFireTime;
+
+    public string WeaponName => _weaponName;
+    public float Damage => _damage;
+    public virtual bool CanFire => !_magazine.IsReloading && _magazine.HasAmmo() && Time.time >= _nextFireTime;
 
     public Magazine Magazine => _magazine;
-    public float Damage => _damage;
 
-    public bool CanFire()
+    public virtual void Fire()
     {
-        return !_magazine.IsReloading
-            && _magazine.HasAmmo()
-            && Time.time >= _nextFireTime;
-    }
+        if (!CanFire) return;
 
-    public void Fire()
-    {
         _magazine.ConsumeAmmo();
         _nextFireTime = Time.time + _fireCooldown;
+        OnFire();
     }
 
-    public void StartReload()
+    public virtual void Reload()
     {
         _magazine.StartReload();
+    }
+
+    protected virtual void OnFire()
+    {
+        
     }
 }

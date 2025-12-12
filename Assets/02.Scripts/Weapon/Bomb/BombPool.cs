@@ -19,6 +19,12 @@ public class BombPool : MonoBehaviour, IBombPool
         InitializePool();
     }
 
+    private void Start()
+    {
+        // 초기 상태 이벤트 발행
+        GameEvents.TriggerBombCountChanged(AvailableCount, _maxPoolSize);
+    }
+
     private void InitializePool()
     {
         _pool = new ObjectPool<Bomb>(
@@ -41,6 +47,8 @@ public class BombPool : MonoBehaviour, IBombPool
 
         Bomb bomb = _pool.Get();
         bomb.transform.position = position;
+
+        GameEvents.TriggerBombCountChanged(AvailableCount, _maxPoolSize);
         return bomb;
     }
 
@@ -50,8 +58,9 @@ public class BombPool : MonoBehaviour, IBombPool
         {
             return;
         }
-        
+
         _pool.Release(bomb);
+        GameEvents.TriggerBombCountChanged(AvailableCount, _maxPoolSize);
     }
 
     private Bomb CreateBomb()

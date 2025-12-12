@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5967660396109134331}
   m_Layer: 6
   m_Name: FirePoint
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -217,6 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
+  _currentHealth: 0
   MaxStamina: 100
   StaminaRecoveryRate: 10
 --- !u!114 &1380718866570747641
@@ -248,12 +249,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c2c8aca8f54d3744803b0066268610c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gun: {fileID: 922008891625935987}
+  _rifle: {fileID: 4069204468482278185}
   _fireTransform: {fileID: 5967660396109134331}
   _hitEffect: {fileID: 0}
-  _recoil: {fileID: 1376178213578236864}
   _cameraRotate: {fileID: 0}
   _cameraShake: {fileID: 0}
+  _recoil:
+    _verticalMin: 1
+    _verticalMax: 2
+    _horizontalMin: -0.5
+    _horizontalMax: 0.5
   _hitLayers:
     serializedVersion: 2
     m_Bits: 1939
@@ -268,12 +273,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7541853976441280221}
-  - component: {fileID: 922008891625935987}
   - component: {fileID: 715682834838266593}
-  - component: {fileID: 1376178213578236864}
+  - component: {fileID: 4069204468482278185}
   m_Layer: 6
   m_Name: Gun
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -292,23 +296,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1379027422579626073}
+  - {fileID: 3326760103621519608}
   m_Father: {fileID: 2292504110922916621}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &922008891625935987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4171201832200922133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 051b36e4b30fc0643b9833cdb1e7f4b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fireCooldown: 0.1
-  _damage: 25
-  _magazine: {fileID: 715682834838266593}
 --- !u!114 &715682834838266593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,7 +314,7 @@ MonoBehaviour:
   _capacity: 30
   _startingMagazines: 5
   _reloadTime: 1.6
---- !u!114 &1376178213578236864
+--- !u!114 &4069204468482278185
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -333,13 +323,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4171201832200922133}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33c083f9e2d0ae54396f817101d923b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e1736265f3bd46e69b9a94e0bda3c4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _verticalMin: 1
-  _verticalMax: 2
-  _horizontalMin: -0.5
-  _horizontalMax: 0.5
+  _weaponName: Gun
+  _fireCooldown: 0.1
+  _damage: 25
+  _magazine: {fileID: 363104021842258527}
 --- !u!1 &4404966909852840755
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +343,7 @@ GameObject:
   - component: {fileID: 7173303734661152249}
   m_Layer: 6
   m_Name: Nose
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -440,7 +430,7 @@ GameObject:
   - component: {fileID: 2778808105351683191}
   m_Layer: 6
   m_Name: View
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -531,7 +521,54 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &5554173732025912750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3326760103621519608}
+  - component: {fileID: 363104021842258527}
+  m_Layer: 6
+  m_Name: Magazine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3326760103621519608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5554173732025912750}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7541853976441280221}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &363104021842258527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5554173732025912750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea83db81f0fdeb74081cdbdd010b340a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _capacity: 30
+  _startingMagazines: 5
+  _reloadTime: 1.6

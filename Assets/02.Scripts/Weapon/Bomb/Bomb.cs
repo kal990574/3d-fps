@@ -114,7 +114,7 @@ public class Bomb : MonoBehaviour
             _hitLayers
         );
         ExplosionDamage.Explode(explosionData);
-        BombExplosion.Execute(transform.position, _explosionEffectPool);
+        _explosionEffectPool?.Play(transform.position);
 
         ReturnToPool();
     }

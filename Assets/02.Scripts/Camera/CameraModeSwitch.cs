@@ -22,8 +22,7 @@ public class CameraModeSwitch : MonoBehaviour
 
     private void Update()
     {
-        // T키로 모드 전환
-        if (Input.GetKeyDown(KeyCode.V))
+        if (InputManager.Instance.CameraTogglePressed)
         {
             ToggleCameraMode();
         }

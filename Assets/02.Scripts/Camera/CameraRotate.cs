@@ -36,7 +36,7 @@ public class CameraRotate : MonoBehaviour
 
     private void HandleCursorLock()
     {
-        if (!Input.GetKeyDown(KeyCode.Escape))
+        if (!InputManager.Instance.EscapePressed)
         {
             return;
         }
@@ -55,8 +55,8 @@ public class CameraRotate : MonoBehaviour
 
     private void HandleMouseInput()
     {
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+        float mouseX = InputManager.Instance.MouseX;
+        float mouseY = InputManager.Instance.MouseY;
 
         _pitch -= mouseY * MouseSensitivity;
         _yaw += mouseX * MouseSensitivity;
