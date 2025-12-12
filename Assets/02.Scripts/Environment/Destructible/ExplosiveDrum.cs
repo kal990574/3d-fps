@@ -11,9 +11,6 @@ public class ExplosiveDrum : DestructibleBase
     [SerializeField] private float _launchForce = 15f;
     [SerializeField] private float _torqueForce = 5f;
 
-    [Header("Effects")]
-    [SerializeField] private ExplosionEffectPool _explosionEffectPool;
-
     private Rigidbody _rigidbody;
 
     protected override void Awake()
@@ -42,7 +39,7 @@ public class ExplosiveDrum : DestructibleBase
 
     private void PlayExplosionEffect()
     {
-        _explosionEffectPool?.Play(transform.position);
+        EffectPoolManager.Instance?.Play("DrumExplosion", transform.position);
     }
 
     private void LaunchDrum()

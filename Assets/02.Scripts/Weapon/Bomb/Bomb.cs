@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Bomb : MonoBehaviour
+public class Bomb : MonoBehaviour, IPoolable
 {
     [Header("Explosion Settings")]
     [SerializeField] private float _explosionDelay = 10f;
@@ -9,8 +9,6 @@ public class Bomb : MonoBehaviour
     [SerializeField] private LayerMask _hitLayers;
 
     private Rigidbody _rigidbody;
-    private IEffectPool _explosionEffectPool;
-    private IBombPool _pool;
     private float _timer;
     private bool _hasExploded;
 
@@ -25,17 +23,14 @@ public class Bomb : MonoBehaviour
         _hasExploded = false;
     }
 
-    public void Initialize(IBombPool pool)
+    public void OnGetFromPool() { }
+
+    public void OnReturnToPool()
     {
-        _pool = pool;
+        ResetState();
     }
 
-    public void SetExplosionEffectPool(IEffectPool effectPool)
-    {
-        _explosionEffectPool = effectPool;
-    }
-
-    public void ResetState()
+    private void ResetState()
     {
         _hasExploded = false;
         _timer = _explosionDelay;
@@ -114,24 +109,25 @@ public class Bomb : MonoBehaviour
             _hitLayers
         );
         ExplosionDamage.Explode(explosionData);
-        _explosionEffectPool?.Play(transform.position);
+        EffectPoolManager.Instance?.Play("BombExplosion", transform.position);
 
         ReturnToPool();
     }
 
     private void ReturnToPool()
     {
-        if (_pool == null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         if (!gameObject.activeInHierarchy)
         {
             return;
         }
-        
-        _pool.Release(this);
+
+        if (GameplayPoolManager.Instance != null)
+        {
+            GameplayPoolManager.Instance.ReleaseBomb(this);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
