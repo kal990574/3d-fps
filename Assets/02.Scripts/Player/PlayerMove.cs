@@ -56,12 +56,12 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 1. 키보드 입력 받기
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
+        float x = InputManager.Instance.Horizontal;
+        float y = InputManager.Instance.Vertical;
         bool isMoving = x != 0 || y != 0;
 
         // 2. 점프 처리
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (InputManager.Instance.JumpPressed)
         {
             if (_jumpCount == 0)
             {
@@ -81,7 +81,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 3. 달리기 입력 확인
-        bool wantsToSprint = Input.GetKey(KeyCode.LeftShift);
+        bool wantsToSprint = InputManager.Instance.SprintHeld;
         bool isSprinting = wantsToSprint && isMoving && _playerStats.HasStamina(0.1f);
 
         // 4. 스태미나 처리

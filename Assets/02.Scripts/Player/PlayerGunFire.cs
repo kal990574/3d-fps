@@ -34,7 +34,7 @@ public class PlayerGunFire : MonoBehaviour
 
     private void HandleFireInput()
     {
-        if (Input.GetMouseButton(0) && _gun.CanFire)
+        if (InputManager.Instance.FireHeld && _gun.CanFire)
         {
             _gun.Fire();
             PerformRaycast();
@@ -56,7 +56,7 @@ public class PlayerGunFire : MonoBehaviour
 
     private void HandleReloadInput()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (InputManager.Instance.ReloadPressed)
         {
             _gun.Reload();
         }

@@ -54,7 +54,7 @@ public class PlayerBombFire : MonoBehaviour
 
     private void HandleFireInput()
     {
-        if (Input.GetMouseButtonDown(1) && CanFire())
+        if (InputManager.Instance.RightFirePressed && CanFire())
         {
             Fire();
         }
