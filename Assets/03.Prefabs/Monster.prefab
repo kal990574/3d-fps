@@ -125,7 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e63ee25f1626546e49a2219ea481637b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  State: 0
   _player: {fileID: 1670335538538772970, guid: 78114e439ad0c0c489001138c22990da, type: 3}
   _controller: {fileID: 3657013618593052023}
   DetectDistance: 15
@@ -134,13 +133,11 @@ MonoBehaviour:
   MoveSpeed: 5
   AttackSpeed: 2
   AttackDamage: 10
-  AttackTimer: 0
   PatrolRadius: 10
-  PatrolIdleTime: 2
+  PatrolIdleTime: 1.5
   ComebackStopDistance: 0.5
   KnockbackDistance: 3
   KnockbackDuration: 0.3
-  Health: 100
 --- !u!143 &3657013618593052023
 CharacterController:
   m_ObjectHideFlags: 0
@@ -194,7 +191,7 @@ Transform:
   m_GameObject: {fileID: 8661595044309174864}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.025, y: 0.384, z: 0.405}
+  m_LocalPosition: {x: 0.007, y: 0.384, z: 0.405}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children: []

@@ -103,7 +103,8 @@ public class PlayerGunFire : MonoBehaviour
         IDamageable damageable = hit.collider.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage(_gun.Damage);
+            DamageInfo damageInfo = new DamageInfo(_gun.Damage, transform.position, EDamageType.Bullet);
+            damageable.TakeDamage(damageInfo);
         }
     }
 

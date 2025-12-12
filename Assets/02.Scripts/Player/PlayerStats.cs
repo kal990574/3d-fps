@@ -54,9 +54,9 @@ public class PlayerStats : MonoBehaviour, IDamageable
         return _currentStamina >= amount;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(DamageInfo damageInfo)
     {
-        _currentHealth -= damage;
+        _currentHealth -= damageInfo.Damage;
         _currentHealth = Mathf.Max(_currentHealth, 0);
 
         if (_currentHealth <= 0)
