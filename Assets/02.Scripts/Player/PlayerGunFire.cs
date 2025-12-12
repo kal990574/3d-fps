@@ -6,9 +6,11 @@ public class PlayerGunFire : MonoBehaviour
     [SerializeField] private Gun _gun;
     [SerializeField] private Transform _fireTransform;
     [SerializeField] private ParticleSystem _hitEffect;
-    [SerializeField] private Recoil _recoil;
     [SerializeField] private CameraRotate _cameraRotate;
     [SerializeField] private CameraShake _cameraShake;
+
+    [Header("Recoil Settings")]
+    [SerializeField] private Recoil _recoil = new Recoil();
 
     [Header("Raycast Settings")]
     [SerializeField] private LayerMask _hitLayers;

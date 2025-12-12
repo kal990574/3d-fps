@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 
-public class Recoil : MonoBehaviour
+[Serializable]
+public class Recoil
 {
     [Header("Vertical Recoil (Up)")]
     [SerializeField] private float _verticalMin = 1f;
@@ -12,8 +14,8 @@ public class Recoil : MonoBehaviour
 
     public Vector2 GetRecoil()
     {
-        float vertical = Random.Range(_verticalMin, _verticalMax);
-        float horizontal = Random.Range(_horizontalMin, _horizontalMax);
+        float vertical = UnityEngine.Random.Range(_verticalMin, _verticalMax);
+        float horizontal = UnityEngine.Random.Range(_horizontalMin, _horizontalMax);
 
         return new Vector2(vertical, horizontal);
     }
