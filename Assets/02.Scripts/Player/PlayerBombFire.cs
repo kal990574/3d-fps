@@ -2,15 +2,9 @@ using UnityEngine;
 
 public class PlayerBombFire : MonoBehaviour
 {
-    [Header("Pool Reference")]
-    [SerializeField] private BombPool _bombPool;
-
     [Header("Fire Settings")]
     [SerializeField] private Transform _firePoint;
     [SerializeField] private float _throwForce = 15f;
-
-    [Header("Effects")]
-    [SerializeField] private ExplosionEffectPool _explosionEffectPool;
 
     [Header("Cooldown")]
     [SerializeField] private float _fireCooldown = 0.5f;
@@ -40,11 +34,6 @@ public class PlayerBombFire : MonoBehaviour
         {
             Debug.LogError("FirePoint not assigned!");
         }
-
-        if (_bombPool == null)
-        {
-            Debug.LogError("BombPool not assigned!");
-        }
     }
 
     private void Update()
@@ -62,19 +51,17 @@ public class PlayerBombFire : MonoBehaviour
 
     private bool CanFire()
     {
-        return Time.time >= _nextFireTime && _bombPool.CanGet;
+        return Time.time >= _nextFireTime;
     }
 
     private void Fire()
     {
-        Bomb bomb = _bombPool.Get(_firePoint.position);
+        Bomb bomb = GameplayPoolManager.Instance?.GetBomb(_firePoint.position);
 
         if (bomb == null)
         {
             return;
         }
-
-        bomb.SetExplosionEffectPool(_explosionEffectPool);
 
         Vector3 fireDirection = _mainCamera.transform.forward;
         bomb.Launch(fireDirection, _throwForce);
