@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class Monster : MonoBehaviour, IDamageable
 
     public EMonsterState State { get; private set; } = EMonsterState.Idle;
     public float Health { get; private set; } = 200f;
+
+    public event Action<float, float> OnHealthChanged;
 
     [SerializeField] private GameObject _player;
     [SerializeField] private CharacterController _controller;
@@ -48,6 +51,7 @@ public class Monster : MonoBehaviour, IDamageable
     {
         InitializeReferences();
         InitializePosition();
+        OnHealthChanged?.Invoke(Health, 200f);
     }
 
     private void Update()
@@ -187,6 +191,7 @@ public class Monster : MonoBehaviour, IDamageable
         }
 
         Health -= damageInfo.Damage;
+        OnHealthChanged?.Invoke(Health, 200f);
 
         if (Health > 0)
         {
@@ -286,7 +291,7 @@ public class Monster : MonoBehaviour, IDamageable
 
     private void SetRandomPatrolTarget()
     {
-        Vector2 randomCircle = Random.insideUnitCircle * PatrolRadius;
+        Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * PatrolRadius;
         _patrolTarget = _originPosition + new Vector3(randomCircle.x, 0, randomCircle.y);
     }
 
