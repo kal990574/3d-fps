@@ -1174,6 +1174,7 @@ MonoBehaviour:
   _maxShakeAngle: 2
   _frequency: 60
   _traumaDecay: 2.5
+  _damageTrauma: 2
 --- !u!4 &332266492 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5760612341417468079, guid: d86794dbfc5b840048cdd74eca6b2e58, type: 3}
@@ -5542,6 +5543,10 @@ PrefabInstance:
     - target: {fileID: 5760612341417468079, guid: d86794dbfc5b840048cdd74eca6b2e58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6298956074075395943, guid: d86794dbfc5b840048cdd74eca6b2e58, type: 3}
+      propertyPath: _attackDamage
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
