@@ -14,6 +14,10 @@ GameObject:
   - component: {fileID: 2183096664763435268}
   - component: {fileID: 4944844060823937818}
   - component: {fileID: 3657013618593052023}
+  - component: {fileID: 6298956074075395943}
+  - component: {fileID: 1635039286896178268}
+  - component: {fileID: 5563690554507476127}
+  - component: {fileID: 1450270303214368841}
   m_Layer: 7
   m_Name: Monster
   m_TagString: Untagged
@@ -126,22 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e63ee25f1626546e49a2219ea481637b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnHealthChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  _player: {fileID: 0}
-  _controller: {fileID: 3657013618593052023}
-  DetectDistance: 15
-  AttackDistance: 3
-  MaxTraceDistance: 15
-  MoveSpeed: 5
-  AttackSpeed: 1
-  AttackDamage: 20
-  PatrolRadius: 10
-  PatrolIdleTime: 1.5
-  ComebackStopDistance: 0.5
-  KnockbackDistance: 3
-  KnockbackDuration: 0.3
 --- !u!143 &3657013618593052023
 CharacterController:
   m_ObjectHideFlags: 0
@@ -167,6 +155,65 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6298956074075395943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319844064543305143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7740587b506e45d8844badf3b7ac104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackSpeed: 2
+  _attackDamage: 10
+  _attackDistance: 1.2
+--- !u!114 &1635039286896178268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319844064543305143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54fa7839514d2453bb100b788ba75a0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _knockbackDistance: 2
+  _knockbackDuration: 0.3
+--- !u!114 &5563690554507476127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319844064543305143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f341b976c2b4d88b157296edcb8a83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _detectDistance: 10
+  _maxTraceDistance: 15
+  _patrolRadius: 5
+  _patrolIdleTime: 2
+  _comebackStopDistance: 0.5
+--- !u!114 &1450270303214368841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319844064543305143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474976a85333343598b83210acd2fb66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 5
 --- !u!1 &4136497007340027791
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,10 +329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c2383c9b8074e1fb02fb5198224c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _monster: {fileID: 4944844060823937818}
+  _monsterHealth: {fileID: 1635039286896178268}
   _healthBarFill: {fileID: 9060558536281860519}
-  _monsterNameText: {fileID: 0}
-  _monsterName: Zombie
   _healthBarColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &4166108010553312548
 GameObject:

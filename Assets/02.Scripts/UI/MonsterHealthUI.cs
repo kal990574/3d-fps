@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class MonsterHealthUI : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private Monster _monster;
+    [SerializeField] private MonsterHealth _monsterHealth;
     [SerializeField] private Image _healthBarFill;
 
     [Header("Settings")]
@@ -20,17 +20,17 @@ public class MonsterHealthUI : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_monster != null)
+        if (_monsterHealth != null)
         {
-            _monster.OnHealthChanged += UpdateHealth;
+            _monsterHealth.OnHealthChanged += UpdateHealth;
         }
     }
 
     private void OnDisable()
     {
-        if (_monster != null)
+        if (_monsterHealth != null)
         {
-            _monster.OnHealthChanged -= UpdateHealth;
+            _monsterHealth.OnHealthChanged -= UpdateHealth;
         }
     }
 
@@ -43,9 +43,9 @@ public class MonsterHealthUI : MonoBehaviour
     {
         _mainCamera = Camera.main;
 
-        if (_monster == null)
+        if (_monsterHealth == null)
         {
-            _monster = GetComponentInParent<Monster>();
+            _monsterHealth = GetComponentInParent<MonsterHealth>();
         }
     }
 
