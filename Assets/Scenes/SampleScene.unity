@@ -5574,15 +5574,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1379027422579626073, guid: 78114e439ad0c0c489001138c22990da, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.163
+      value: 0.145
       objectReference: {fileID: 0}
     - target: {fileID: 1379027422579626073, guid: 78114e439ad0c0c489001138c22990da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.297
+      value: 0.315
       objectReference: {fileID: 0}
     - target: {fileID: 1379027422579626073, guid: 78114e439ad0c0c489001138c22990da, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.154
+      value: 0.225
       objectReference: {fileID: 0}
     - target: {fileID: 1670335538538772970, guid: 78114e439ad0c0c489001138c22990da, type: 3}
       propertyPath: m_Name
@@ -5630,7 +5630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2778808105351683191, guid: 78114e439ad0c0c489001138c22990da, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6779593040222286972, guid: 78114e439ad0c0c489001138c22990da, type: 3}
       propertyPath: _fireTrauma
