@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour
 {
@@ -11,9 +12,9 @@ public class InputManager : MonoBehaviour
     public bool SprintHeld => Input.GetKey(KeyCode.LeftShift);
 
     // Combat
-    public bool FireHeld => Input.GetMouseButton(0);
-    public bool FirePressed => Input.GetMouseButtonDown(0);
-    public bool RightFirePressed => Input.GetMouseButtonDown(1);
+    public bool FireHeld => Input.GetMouseButton(0) && !IsPointerOverUI();
+    public bool FirePressed => Input.GetMouseButtonDown(0) && !IsPointerOverUI();
+    public bool RightFirePressed => Input.GetMouseButtonDown(1) && !IsPointerOverUI();
     public bool ReloadPressed => Input.GetKeyDown(KeyCode.R);
 
     // Camera
@@ -40,5 +41,10 @@ public class InputManager : MonoBehaviour
         {
             Instance = null;
         }
+    }
+
+    private bool IsPointerOverUI()
+    {
+        return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
     }
 }
