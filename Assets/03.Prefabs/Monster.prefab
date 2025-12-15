@@ -167,9 +167,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7740587b506e45d8844badf3b7ac104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackSpeed: 2
-  _attackDamage: 10
-  _attackDistance: 1.2
+  _attackSpeed: 1
+  _attackDamage: 20
+  _attackDistance: 3
 --- !u!114 &1635039286896178268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,9 +197,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _detectDistance: 10
-  _maxTraceDistance: 15
-  _patrolRadius: 5
-  _patrolIdleTime: 2
+  _maxTraceDistance: 20
+  _patrolRadius: 10
+  _patrolIdleTime: 1.5
   _comebackStopDistance: 0.5
 --- !u!114 &1450270303214368841
 MonoBehaviour:
