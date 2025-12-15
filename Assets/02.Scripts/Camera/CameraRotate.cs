@@ -23,34 +23,12 @@ public class CameraRotate : MonoBehaviour
     {
         _currentMinPitch = MinVerticalAngle;
         _currentMaxPitch = MaxVerticalAngle;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     private void Update()
     {
-        HandleCursorLock();
         HandleMouseInput();
         ApplyRotation();
-    }
-
-    private void HandleCursorLock()
-    {
-        if (!InputManager.Instance.EscapePressed)
-        {
-            return;
-        }
-
-        if (Cursor.lockState == CursorLockMode.Locked)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
     }
 
     private void HandleMouseInput()

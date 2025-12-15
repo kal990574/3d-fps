@@ -52,9 +52,38 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartToPlay_Coroutine());
     }
 
+    private void Update()
+    {
+        HandleCursorLock();
+    }
+
     private void OnDestroy()
     {
         GameEvents.OnPlayerDeath -= HandlePlayerDeath;
+    }
+
+    private void HandleCursorLock()
+    {
+        if (_state != EGameState.Playing)
+        {
+            return;
+        }
+
+        if (!InputManager.Instance.EscapePressed)
+        {
+            return;
+        }
+
+        if (Cursor.lockState == CursorLockMode.Locked)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     private void ValidateReferences()
