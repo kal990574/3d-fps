@@ -175,11 +175,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 120
   _destroyDelay: 5
-  _explosionRadius: 10
+  _explosionRadius: 5
   _explosionDamage: 250
   _hitLayers:
     serializedVersion: 2
     m_Bits: 1728
   _launchForce: 15
   _torqueForce: 5
-  _explosionEffectPool: {fileID: 1007312400496384250, guid: 49b09b173040b49ad9e944299b3259b7, type: 3}

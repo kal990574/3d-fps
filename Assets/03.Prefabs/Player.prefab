@@ -273,7 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1866350293122594669}
   - component: {fileID: 5963690617643202007}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MinimapIcon_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +377,7 @@ Transform:
   m_GameObject: {fileID: 4171201832200922133}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.103}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -531,7 +531,7 @@ Transform:
   m_GameObject: {fileID: 4420072641762177921}
   serializedVersion: 2
   m_LocalRotation: {x: -0.12139104, y: -0.117809616, z: 0.0038652134, w: 0.98558116}
-  m_LocalPosition: {x: 0.155, y: 0.305, z: 0.186}
+  m_LocalPosition: {x: 0.176, y: 0.284, z: 0.102}
   m_LocalScale: {x: 0.03, y: 0.03, z: 0.9707632}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -553,7 +553,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4420072641762177921}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
