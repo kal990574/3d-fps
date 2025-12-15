@@ -7,6 +7,9 @@ public class CameraShake : MonoBehaviour
     [SerializeField] private float _frequency = 60f;
     [SerializeField] private float _traumaDecay = 2.5f;
 
+    [Header("Damage Shake")]
+    [SerializeField] private float _damageTrauma = 0.4f;
+
     private float _trauma;
     private float _seed;
     private Vector3 _originalRotation;
@@ -14,6 +17,21 @@ public class CameraShake : MonoBehaviour
     private void Awake()
     {
         _seed = Random.value * 1000f;
+    }
+
+    private void OnEnable()
+    {
+        GameEvents.OnPlayerDamaged += OnPlayerDamaged;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OnPlayerDamaged -= OnPlayerDamaged;
+    }
+
+    private void OnPlayerDamaged()
+    {
+        AddTrauma(_damageTrauma);
     }
 
     private void LateUpdate()

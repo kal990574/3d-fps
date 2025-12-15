@@ -77,6 +77,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _currentHealth = Mathf.Max(_currentHealth, 0);
 
         GameEvents.TriggerHealthChanged(_currentHealth, MaxHealth);
+        GameEvents.TriggerPlayerDamaged();
 
         if (_currentHealth <= 0)
         {
