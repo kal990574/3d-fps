@@ -10,6 +10,11 @@ public static class GameEvents
     // Bomb Pool Events
     public static event Action<int, int> OnBombCountChanged;   // (available, max)
 
+    // Game State Events
+    public static event Action<EGameState> OnGameStateChanged;
+    public static event Action OnGamePaused;
+    public static event Action OnGameResumed;
+
     // Trigger Methods
     public static void TriggerHealthChanged(float current, float max)
         => OnHealthChanged?.Invoke(current, max);
@@ -22,4 +27,13 @@ public static class GameEvents
 
     public static void TriggerBombCountChanged(int available, int max)
         => OnBombCountChanged?.Invoke(available, max);
+
+    public static void TriggerGameStateChanged(EGameState newState)
+        => OnGameStateChanged?.Invoke(newState);
+
+    public static void TriggerGamePaused()
+        => OnGamePaused?.Invoke();
+
+    public static void TriggerGameResumed()
+        => OnGameResumed?.Invoke();
 }
