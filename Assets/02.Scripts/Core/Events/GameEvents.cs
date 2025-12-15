@@ -6,6 +6,7 @@ public static class GameEvents
     public static event Action<float, float> OnHealthChanged;  // (current, max)
     public static event Action<float, float> OnStaminaChanged; // (current, max)
     public static event Action OnPlayerDeath;
+    public static event Action OnPlayerDamaged;
 
     // Bomb Pool Events
     public static event Action<int, int> OnBombCountChanged;   // (available, max)
@@ -24,6 +25,9 @@ public static class GameEvents
 
     public static void TriggerPlayerDeath()
         => OnPlayerDeath?.Invoke();
+
+    public static void TriggerPlayerDamaged()
+        => OnPlayerDamaged?.Invoke();
 
     public static void TriggerBombCountChanged(int available, int max)
         => OnBombCountChanged?.Invoke(available, max);
