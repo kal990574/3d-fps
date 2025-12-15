@@ -1119,8 +1119,8 @@ MonoBehaviour:
   MouseSensitivity: 2
   MaxVerticalAngle: 90
   MinVerticalAngle: -90
-  _minPitchNearWall: 40
-  _maxPitchNearWall: 80
+  _minPitchNearWall: -90
+  _maxPitchNearWall: 90
   _pitchLerpSpeed: 10
 --- !u!114 &330585549
 MonoBehaviour:
@@ -4577,18 +4577,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster
       objectReference: {fileID: 0}
-    - target: {fileID: 5563690554507476127, guid: d86794dbfc5b840048cdd74eca6b2e58, type: 3}
-      propertyPath: _patrolRadius
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5563690554507476127, guid: d86794dbfc5b840048cdd74eca6b2e58, type: 3}
-      propertyPath: _patrolIdleTime
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5563690554507476127, guid: d86794dbfc5b840048cdd74eca6b2e58, type: 3}
-      propertyPath: _maxTraceDistance
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 5760612341417468079, guid: d86794dbfc5b840048cdd74eca6b2e58, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.5
@@ -4628,18 +4616,6 @@ PrefabInstance:
     - target: {fileID: 5760612341417468079, guid: d86794dbfc5b840048cdd74eca6b2e58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6298956074075395943, guid: d86794dbfc5b840048cdd74eca6b2e58, type: 3}
-      propertyPath: _attackSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6298956074075395943, guid: d86794dbfc5b840048cdd74eca6b2e58, type: 3}
-      propertyPath: _attackDamage
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6298956074075395943, guid: d86794dbfc5b840048cdd74eca6b2e58, type: 3}
-      propertyPath: _attackDistance
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
