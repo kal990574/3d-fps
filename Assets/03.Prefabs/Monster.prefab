@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7740587b506e45d8844badf3b7ac104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackSpeed: 2
+  _attackSpeed: 1.1
   _attackDamage: 20
   _attackDistance: 3
 --- !u!114 &1635039286896178268
@@ -527,7 +527,7 @@ MonoBehaviour:
   _shakeTarget: {fileID: 3955723948901504113}
   _delayBarColor: {r: 1, g: 0.4862745, b: 0.4862745, a: 1}
   _delayDuration: 1
-  _flashDuration: 0.5
+  _flashDuration: 0.2
   _shakeDuration: 0.15
   _shakeStrength: 15
 --- !u!1 &4166108010553312548
