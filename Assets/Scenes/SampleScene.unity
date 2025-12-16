@@ -2604,10 +2604,10 @@ MonoBehaviour:
   _healthDelaySlider: {fileID: 881618703}
   _healthFlashOverlay: {fileID: 869795803}
   _healthShakeTarget: {fileID: 1778723100}
-  _delayDuration: 0.6
+  _delayDuration: 1
   _flashDuration: 0.5
   _shakeDuration: 0.15
-  _shakeStrength: 10
+  _shakeStrength: 15
 --- !u!1 &867739972
 GameObject:
   m_ObjectHideFlags: 0

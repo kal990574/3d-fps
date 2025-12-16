@@ -52,8 +52,8 @@ public class StatUI : MonoBehaviour
         if (_healthDelaySlider != null)
         {
             _healthDelaySlider.maxValue = max;
-
-            // 첫 호출 시 딜레이 바도 동기화
+            
+            // 첫 호출 시.
             if (_previousHealthValue < 0f)
             {
                 _healthDelaySlider.value = current;
@@ -61,7 +61,6 @@ public class StatUI : MonoBehaviour
                 return;
             }
 
-            // 피격 판정 (체력 감소)
             bool tookDamage = current < _previousHealthValue;
 
             if (tookDamage)
@@ -71,7 +70,6 @@ public class StatUI : MonoBehaviour
             }
             else
             {
-                // 회복 시 딜레이 바도 즉시 동기화
                 _healthDelaySlider.DOKill();
                 _healthDelaySlider.value = current;
             }

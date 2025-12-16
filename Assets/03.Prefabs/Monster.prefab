@@ -526,10 +526,10 @@ MonoBehaviour:
   _flashOverlay: {fileID: 8290062707318642924}
   _shakeTarget: {fileID: 3955723948901504113}
   _delayBarColor: {r: 1, g: 0.4862745, b: 0.4862745, a: 1}
-  _delayDuration: 0.6
+  _delayDuration: 1
   _flashDuration: 0.5
   _shakeDuration: 0.15
-  _shakeStrength: 10
+  _shakeStrength: 15
 --- !u!1 &4166108010553312548
 GameObject:
   m_ObjectHideFlags: 0
