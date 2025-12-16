@@ -77,6 +77,7 @@ public class MonsterStateMachine : MonoBehaviour
 
     public void ChangeState(EMonsterState stateType)
     {
+        EMonsterState previousState = CurrentStateType;
         CurrentStateType = stateType;
 
         IMonsterState newState = stateType switch
@@ -88,6 +89,7 @@ public class MonsterStateMachine : MonoBehaviour
             EMonsterState.Attack => new MonsterAttackState(this),
             EMonsterState.Hit => new MonsterHitState(this),
             EMonsterState.Death => new MonsterDeadState(this),
+            EMonsterState.Jump => new MonsterJumpState(this, previousState),
             _ => new MonsterIdleState(this)
         };
 

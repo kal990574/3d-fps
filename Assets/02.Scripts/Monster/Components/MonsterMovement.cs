@@ -16,12 +16,19 @@ public class MonsterMovement : MonoBehaviour
     [Header("Knockback Settings")]
     [SerializeField] private float _knockbackDuration = 0.3f;
 
+    [Header("Jump Settings")]
+    [SerializeField] private float _jumpHeight = 2f;
+    [SerializeField] private float _jumpDuration = 0.5f;
+
     private NavMeshAgent _agent;
     private CharacterController _controller;
     private bool _isKnockbackActive;
+    private bool _isJumping;
 
     public float MoveSpeed => _moveSpeed;
     public bool IsKnockbackActive => _isKnockbackActive;
+    public bool IsJumping => _isJumping;
+    public bool IsOnOffMeshLink => _agent != null && _agent.isOnOffMeshLink;
 
     public bool HasReachedDestination
     {
@@ -231,5 +238,66 @@ public class MonsterMovement : MonoBehaviour
         Vector3 direction = (target - transform.position).normalized;
         direction.y = 0;
         return direction;
+    }
+
+    public bool TryGetCurrentLinkEndPosition(out Vector3 endPosition)
+    {
+        if (_agent != null && _agent.isOnOffMeshLink)
+        {
+            OffMeshLinkData linkData = _agent.currentOffMeshLinkData;
+            endPosition = linkData.endPos;
+            return true;
+        }
+
+        endPosition = Vector3.zero;
+        return false;
+    }
+
+    public void StartJump(Vector3 endPosition)
+    {
+        if (_isJumping)
+        {
+            return;
+        }
+
+        StartCoroutine(JumpCoroutine(endPosition));
+    }
+
+    public void CompleteOffMeshLink()
+    {
+        if (_agent != null && _agent.isOnOffMeshLink)
+        {
+            _agent.CompleteOffMeshLink();
+        }
+    }
+
+    private IEnumerator JumpCoroutine(Vector3 endPosition)
+    {
+        _isJumping = true;
+        _agent.isStopped = true;
+
+        Vector3 startPosition = transform.position;
+        float elapsed = 0f;
+
+        while (elapsed < _jumpDuration)
+        {
+            float t = elapsed / _jumpDuration;
+
+            Vector3 horizontalPos = Vector3.Lerp(startPosition, endPosition, t);
+            float height = Mathf.Sin(t * Mathf.PI) * _jumpHeight;
+
+            transform.position = new Vector3(
+                horizontalPos.x,
+                Mathf.Lerp(startPosition.y, endPosition.y, t) + height,
+                horizontalPos.z
+            );
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = endPosition;
+        _isJumping = false;
+        _agent.isStopped = false;
     }
 }

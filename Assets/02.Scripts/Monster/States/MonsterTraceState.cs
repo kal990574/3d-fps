@@ -20,6 +20,12 @@ public class MonsterTraceState : IMonsterState
             return;
         }
 
+        if (_stateMachine.Movement.IsOnOffMeshLink)
+        {
+            _stateMachine.ChangeState(EMonsterState.Jump);
+            return;
+        }
+
         float distance = _stateMachine.GetDistanceToPlayer();
 
         if (distance > _stateMachine.MaxTraceDistance)

@@ -36,6 +36,12 @@ public class MonsterPatrolState : IMonsterState
             return;
         }
 
+        if (_stateMachine.Movement.IsOnOffMeshLink)
+        {
+            _stateMachine.ChangeState(EMonsterState.Jump);
+            return;
+        }
+
         if (_stateMachine.IsPlayerInRange(_stateMachine.DetectDistance))
         {
             _stateMachine.ChangeState(EMonsterState.Trace);
