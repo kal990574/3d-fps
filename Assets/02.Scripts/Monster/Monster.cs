@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+    [Header("Knockback Settings")]
+    [SerializeField] private float _knockbackDistance = 2f;
+
     private MonsterStateMachine _stateMachine;
     private MonsterHealth _health;
 
@@ -27,7 +30,6 @@ public class Monster : MonoBehaviour
         {
             _health.OnDamaged += HandleDamaged;
             _health.OnDeath += HandleDeath;
-            _health.OnKnockbackComplete += HandleKnockbackComplete;
         }
     }
 
@@ -37,16 +39,21 @@ public class Monster : MonoBehaviour
         {
             _health.OnDamaged -= HandleDamaged;
             _health.OnDeath -= HandleDeath;
-            _health.OnKnockbackComplete -= HandleKnockbackComplete;
         }
     }
 
     private void HandleDamaged(Vector3 damageSourcePosition, float knockbackStrength)
     {
-        if (_stateMachine != null && _stateMachine.CurrentStateType != EMonsterState.Death)
+        if (_stateMachine == null || _stateMachine.CurrentStateType == EMonsterState.Death)
         {
-            _stateMachine.ChangeState(EMonsterState.Hit);
+            return;
         }
+
+        Vector3 knockbackDirection = CalculateKnockbackDirection(damageSourcePosition);
+        float knockbackDistance = _knockbackDistance * knockbackStrength;
+
+        _stateMachine.SetPendingKnockback(knockbackDirection, knockbackDistance);
+        _stateMachine.ChangeState(EMonsterState.Hit);
     }
 
     private void HandleDeath()
@@ -57,11 +64,10 @@ public class Monster : MonoBehaviour
         }
     }
 
-    private void HandleKnockbackComplete()
+    private Vector3 CalculateKnockbackDirection(Vector3 damageSourcePosition)
     {
-        if (_stateMachine != null && _stateMachine.CurrentStateType == EMonsterState.Hit)
-        {
-            _stateMachine.ChangeState(EMonsterState.Idle);
-        }
+        Vector3 direction = (transform.position - damageSourcePosition).normalized;
+        direction.y = 0;
+        return direction;
     }
 }

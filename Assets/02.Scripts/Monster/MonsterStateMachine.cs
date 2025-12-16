@@ -30,6 +30,9 @@ public class MonsterStateMachine : MonoBehaviour
     public float PatrolIdleTime => _patrolIdleTime;
     public float ComebackStopDistance => _comebackStopDistance;
 
+    public Vector3 PendingKnockbackDirection { get; private set; }
+    public float PendingKnockbackDistance { get; private set; }
+
     public MonsterHealth Health => _health;
     public MonsterMovement Movement => _movement;
     public MonsterCombat Combat => _combat;
@@ -109,5 +112,17 @@ public class MonsterStateMachine : MonoBehaviour
         }
 
         return _movement.GetDistanceTo(_playerTransform.position);
+    }
+
+    public void SetPendingKnockback(Vector3 direction, float distance)
+    {
+        PendingKnockbackDirection = direction;
+        PendingKnockbackDistance = distance;
+    }
+
+    public void ClearPendingKnockback()
+    {
+        PendingKnockbackDirection = Vector3.zero;
+        PendingKnockbackDistance = 0f;
     }
 }
