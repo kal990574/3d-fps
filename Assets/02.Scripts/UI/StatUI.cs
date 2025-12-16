@@ -20,6 +20,7 @@ public class StatUI : MonoBehaviour
     [SerializeField] private float _shakeStrength = 5f;
 
     private float _previousHealthValue = -1f;
+    private Vector2 _originalShakePosition;
 
     private void OnEnable()
     {
@@ -31,6 +32,24 @@ public class StatUI : MonoBehaviour
     {
         GameEvents.OnHealthChanged -= UpdateHealth;
         GameEvents.OnStaminaChanged -= UpdateStamina;
+
+        KillAllTweens();
+    }
+
+    private void KillAllTweens()
+    {
+        if (_healthDelaySlider != null)
+        {
+            DOTween.Kill(_healthDelaySlider);
+        }
+        if (_healthFlashOverlay != null)
+        {
+            DOTween.Kill(_healthFlashOverlay);
+        }
+        if (_healthShakeTarget != null)
+        {
+            DOTween.Kill(_healthShakeTarget);
+        }
     }
 
     private void Start()
@@ -38,6 +57,11 @@ public class StatUI : MonoBehaviour
         if (_healthFlashOverlay != null)
         {
             _healthFlashOverlay.color = new Color(1f, 1f, 1f, 0f);
+        }
+
+        if (_healthShakeTarget != null)
+        {
+            _originalShakePosition = _healthShakeTarget.anchoredPosition;
         }
     }
 
@@ -120,6 +144,7 @@ public class StatUI : MonoBehaviour
         }
 
         _healthShakeTarget.DOKill();
+        _healthShakeTarget.anchoredPosition = _originalShakePosition;
         _healthShakeTarget.DOShakeAnchorPos(_shakeDuration, _shakeStrength, 20, 90f, false, false);
     }
 

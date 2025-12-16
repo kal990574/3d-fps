@@ -8,14 +8,13 @@ public class MonsterHealthUI : MonoBehaviour
     [SerializeField] private MonsterHealth _monsterHealth;
     [SerializeField] private Image _healthBarFill;
 
-    [Header("Settings")]
-    [SerializeField] private Color _healthBarColor = Color.red;
+    [Header("Settings")] [SerializeField] private Color _healthBarColor;
 
     [Header("Impact Effects")]
     [SerializeField] private Image _delayBarFill;
     [SerializeField] private Image _flashOverlay;
     [SerializeField] private RectTransform _shakeTarget;
-    [SerializeField] private Color _delayBarColor = new Color(0.5f, 0.1f, 0.1f, 1f);
+    [SerializeField] private Color _delayBarColor;
 
     [Header("Delay Settings")]
     [SerializeField] private float _delayDuration = 0.5f;
@@ -29,6 +28,7 @@ public class MonsterHealthUI : MonoBehaviour
 
     private Camera _mainCamera;
     private float _targetFillAmount = 1f;
+    private Vector2 _originalShakePosition;
 
     private void Start()
     {
@@ -50,6 +50,24 @@ public class MonsterHealthUI : MonoBehaviour
         {
             _monsterHealth.OnHealthChanged -= UpdateHealth;
         }
+
+        KillAllTweens();
+    }
+
+    private void KillAllTweens()
+    {
+        if (_delayBarFill != null)
+        {
+            DOTween.Kill(_delayBarFill);
+        }
+        if (_flashOverlay != null)
+        {
+            DOTween.Kill(_flashOverlay);
+        }
+        if (_shakeTarget != null)
+        {
+            DOTween.Kill(_shakeTarget);
+        }
     }
 
     private void LateUpdate()
@@ -69,6 +87,11 @@ public class MonsterHealthUI : MonoBehaviour
         if (_shakeTarget == null)
         {
             _shakeTarget = GetComponent<RectTransform>();
+        }
+
+        if (_shakeTarget != null)
+        {
+            _originalShakePosition = _shakeTarget.anchoredPosition;
         }
     }
 
@@ -164,6 +187,7 @@ public class MonsterHealthUI : MonoBehaviour
         }
 
         _shakeTarget.DOKill();
+        _shakeTarget.anchoredPosition = _originalShakePosition;
         _shakeTarget.DOShakeAnchorPos(_shakeDuration, _shakeStrength, 20, 90f, false, false);
     }
 
