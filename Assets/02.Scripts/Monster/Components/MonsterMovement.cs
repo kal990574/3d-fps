@@ -294,7 +294,8 @@ public class MonsterMovement : MonoBehaviour
             float t = elapsed / _jumpDuration;
 
             Vector3 horizontalPos = Vector3.Lerp(startPosition, endPosition, t);
-            float height = Mathf.Sin(t * Mathf.PI) * _jumpHeight;
+            float height = Mathf.Sin(t * Mathf.PI) * 
+                           _jumpHeight;
 
             transform.position = new Vector3(
                 horizontalPos.x,

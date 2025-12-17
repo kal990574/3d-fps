@@ -23,6 +23,11 @@ public class PlayerMove : MonoBehaviour
     private PlayerStats _playerStats;
     private Camera _mainCamera;
 
+    // 활성화 상태
+    private bool _isActive = true;
+
+    public bool IsActive => _isActive;
+
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
@@ -40,8 +45,28 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    public void Enable()
+    {
+        _isActive = true;
+
+        if (_characterController != null)
+        {
+            _characterController.enabled = true;
+        }
+    }
+
+    public void Disable()
+    {
+        _isActive = false;
+    }
+
     private void Update()
     {
+        if (!_isActive)
+        {
+            return;
+        }
+
         // 땅에 닿아있는지 체크
         bool isGrounded = _characterController.isGrounded;
 
