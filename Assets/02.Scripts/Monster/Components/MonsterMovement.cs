@@ -24,22 +24,24 @@ public class MonsterMovement : MonoBehaviour
     private CharacterController _controller;
     private bool _isKnockbackActive;
     private bool _isJumping;
+    private Vector3 _cachedLinkEndPosition;
+    private bool _hasValidLinkData;
 
     public float MoveSpeed => _moveSpeed;
     public bool IsKnockbackActive => _isKnockbackActive;
     public bool IsJumping => _isJumping;
-    public bool IsOnOffMeshLink => _agent != null && _agent.isOnOffMeshLink;
 
-    public bool HasReachedDestination
+    public bool IsOnOffMeshLink
     {
         get
         {
-            if (_agent == null || !_agent.enabled || !_agent.isOnNavMesh)
+            if (_agent != null && _agent.isOnOffMeshLink)
             {
+                CacheLinkData();
                 return true;
             }
 
-            return !_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance;
+            return false;
         }
     }
 
@@ -62,6 +64,7 @@ public class MonsterMovement : MonoBehaviour
         _agent.acceleration = _acceleration;
         _agent.stoppingDistance = _stoppingDistance;
         _agent.updateRotation = false;
+        _agent.autoTraverseOffMeshLink = false;
     }
 
     public void MoveTowards(Vector3 target, float speedMultiplier = 1f)
@@ -113,18 +116,6 @@ public class MonsterMovement : MonoBehaviour
 
         result = center;
         return false;
-    }
-
-    public bool HasValidPathTo(Vector3 target)
-    {
-        if (_agent == null || !_agent.enabled || !_agent.isOnNavMesh)
-        {
-            return false;
-        }
-
-        NavMeshPath path = new NavMeshPath();
-        _agent.CalculatePath(target, path);
-        return path.status == NavMeshPathStatus.PathComplete;
     }
 
     public void StopMovement()
@@ -242,15 +233,30 @@ public class MonsterMovement : MonoBehaviour
 
     public bool TryGetCurrentLinkEndPosition(out Vector3 endPosition)
     {
-        if (_agent != null && _agent.isOnOffMeshLink)
+        if (_hasValidLinkData)
         {
-            OffMeshLinkData linkData = _agent.currentOffMeshLinkData;
-            endPosition = linkData.endPos;
+            endPosition = _cachedLinkEndPosition;
             return true;
         }
 
         endPosition = Vector3.zero;
         return false;
+    }
+
+    private void CacheLinkData()
+    {
+        if (_agent != null && _agent.isOnOffMeshLink)
+        {
+            OffMeshLinkData linkData = _agent.currentOffMeshLinkData;
+            _cachedLinkEndPosition = linkData.endPos;
+            _hasValidLinkData = true;
+        }
+    }
+
+    private void ClearLinkCache()
+    {
+        _hasValidLinkData = false;
+        _cachedLinkEndPosition = Vector3.zero;
     }
 
     public void StartJump(Vector3 endPosition)
@@ -269,12 +275,16 @@ public class MonsterMovement : MonoBehaviour
         {
             _agent.CompleteOffMeshLink();
         }
+
+        ClearLinkCache();
+        _agent.isStopped = false;
     }
 
     private IEnumerator JumpCoroutine(Vector3 endPosition)
     {
         _isJumping = true;
         _agent.isStopped = true;
+        _agent.updatePosition = false;
 
         Vector3 startPosition = transform.position;
         float elapsed = 0f;
@@ -297,7 +307,8 @@ public class MonsterMovement : MonoBehaviour
         }
 
         transform.position = endPosition;
+        _agent.Warp(endPosition);
+        _agent.updatePosition = true;
         _isJumping = false;
-        _agent.isStopped = false;
     }
 }
