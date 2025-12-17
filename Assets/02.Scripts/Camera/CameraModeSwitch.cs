@@ -1,49 +1,77 @@
+using System.Numerics;
 using UnityEngine;
 using DG.Tweening;
+using Vector3 = UnityEngine.Vector3;
 
 public class CameraModeSwitch : MonoBehaviour
 {
     [Header("Camera Mode")]
-    [SerializeField] private bool _isFPSMode = true;
-    [SerializeField] private Vector3 _fpsOffset = Vector3.zero;           // FPS: 코 위치
-    [SerializeField] private Vector3 _tpsOffset = new Vector3(0, 2, -5);  // TPS: 뒤쪽 위치
-    [SerializeField] private float _transitionDuration = 0.5f;            // 전환 시간
+    [SerializeField] private CameraMode _currentMode = CameraMode.FPS;
+    [SerializeField] private Vector3 _fpsOffset = Vector3.zero;
+    [SerializeField] private Vector3 _tpsOffset = new Vector3(0, 2, -5);
+    [SerializeField] private Vector3 _quarterOffset = new Vector3(0, 20, -20);
+
+    [Header("Quarter View Settings")]
+    [SerializeField] private Vector3 _quarterRotation = new Vector3(45, 0, 0);
+
+    [Header("Transition")]
+    [SerializeField] private float _transitionDuration = 0.5f;
 
     private Vector3 _currentLocalOffset;
     private Tween _currentTween;
 
-    public Vector3 CurrentOffset => _currentLocalOffset; // CameraFollow에서 접근
+    public Vector3 CurrentOffset => _currentLocalOffset;
+    public bool IsQuarterView => _currentMode == CameraMode.QuarterView;
+    public Vector3 QuarterRotation => _quarterRotation;
 
     private void Start()
     {
-        // 초기 오프셋 설정
-        _currentLocalOffset = _isFPSMode ? _fpsOffset : _tpsOffset;
+        _currentLocalOffset = GetOffsetForMode(_currentMode);
     }
 
     private void Update()
     {
         if (InputManager.Instance.CameraTogglePressed)
         {
-            ToggleCameraMode();
+            CycleNextMode();
         }
     }
 
-    private void ToggleCameraMode()
+    private void CycleNextMode()
     {
-        _isFPSMode = !_isFPSMode;
+        _currentMode = _currentMode switch
+        {
+            CameraMode.FPS => CameraMode.TPS,
+            CameraMode.TPS => CameraMode.QuarterView,
+            CameraMode.QuarterView => CameraMode.FPS,
+            _ => CameraMode.FPS
+        };
 
-        // 진행 중인 Tween 취소
+        TransitionToCurrentMode();
+    }
+
+    private void TransitionToCurrentMode()
+    {
         _currentTween?.Kill();
 
-        // 목표 오프셋
-        Vector3 targetOffset = _isFPSMode ? _fpsOffset : _tpsOffset;
+        Vector3 targetOffset = GetOffsetForMode(_currentMode);
 
-        // DOTween으로 부드러운 전환
         _currentTween = DOTween.To(
             () => _currentLocalOffset,
             x => _currentLocalOffset = x,
             targetOffset,
             _transitionDuration
         ).SetEase(Ease.OutCubic);
+    }
+
+    private Vector3 GetOffsetForMode(CameraMode mode)
+    {
+        return mode switch
+        {
+            CameraMode.FPS => _fpsOffset,
+            CameraMode.TPS => _tpsOffset,
+            CameraMode.QuarterView => _quarterOffset,
+            _ => _fpsOffset
+        };
     }
 }

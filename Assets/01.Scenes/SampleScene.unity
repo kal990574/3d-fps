@@ -1379,6 +1379,7 @@ MonoBehaviour:
   _minPitchNearWall: -90
   _maxPitchNearWall: 90
   _pitchLerpSpeed: 10
+  _modeSwitch: {fileID: 0}
 --- !u!114 &330585549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1412,9 +1413,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf998f3998d303448a452bbe40775857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isFPSMode: 1
+  _currentMode: 0
   _fpsOffset: {x: 0, y: 0, z: 0}
   _tpsOffset: {x: 0.5, y: 0.8, z: -3}
+  _quarterOffset: {x: 0, y: 20, z: -20}
+  _quarterRotation: {x: 45, y: 0, z: 0}
   _transitionDuration: 0.5
 --- !u!114 &330585551
 MonoBehaviour:

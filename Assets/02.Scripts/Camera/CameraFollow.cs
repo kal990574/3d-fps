@@ -37,7 +37,7 @@ public class CameraFollow : MonoBehaviour
             return;
         }
 
-        Vector3 desiredPosition = _noseTransform.position + transform.TransformDirection(_modeSwitch.CurrentOffset);
+        Vector3 desiredPosition = CalculateDesiredPosition();
 
         Vector3 direction = desiredPosition - _noseTransform.position;
         float desiredDistance = direction.magnitude;
@@ -77,5 +77,17 @@ public class CameraFollow : MonoBehaviour
                 Debug.DrawLine(_noseTransform.position, desiredPosition, Color.green, 0.1f);
             }
         }
+    }
+
+    private Vector3 CalculateDesiredPosition()
+    {
+        if (_modeSwitch.IsQuarterView)
+        {
+            // 쿼터뷰: 월드 좌표 기준 오프셋
+            return _noseTransform.position + _modeSwitch.CurrentOffset;
+        }
+
+        // FPS/TPS: 카메라 회전 기준 오프셋
+        return _noseTransform.position + transform.TransformDirection(_modeSwitch.CurrentOffset);
     }
 }
