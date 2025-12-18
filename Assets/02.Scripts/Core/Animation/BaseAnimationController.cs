@@ -7,11 +7,12 @@ public abstract class BaseAnimationController : MonoBehaviour, IAnimatable
     protected static class AnimatorParams
     {
         public const string Speed = "Speed";
-        public const string IsGrounded = "IsGrounded";
         public const string IsDead = "IsDead";
         public const string Attack = "Attack";
         public const string Hit = "Hit";
         public const string Jump = "Jump";
+        public const string Shot = "Shot";
+        public const string Throw = "Throw";
     }
 
     protected virtual void Awake()

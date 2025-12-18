@@ -11,16 +11,23 @@ public class PlayerBombFire : MonoBehaviour
 
     private float _nextFireTime;
     private Camera _mainCamera;
+    private PlayerAnimationController _animController;
 
     private void Start()
     {
         CacheMainCamera();
+        CacheAnimController();
         ValidateReferences();
     }
 
     private void CacheMainCamera()
     {
         _mainCamera = Camera.main;
+    }
+
+    private void CacheAnimController()
+    {
+        _animController = GetComponent<PlayerAnimationController>();
     }
 
     private void ValidateReferences()
@@ -66,6 +73,7 @@ public class PlayerBombFire : MonoBehaviour
         Vector3 fireDirection = _mainCamera.transform.forward;
         bomb.Launch(fireDirection, _throwForce);
         ApplyCooldown();
+        _animController?.TriggerThrow();
     }
 
     private void ApplyCooldown()

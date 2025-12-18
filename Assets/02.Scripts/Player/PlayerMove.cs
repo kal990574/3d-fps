@@ -21,6 +21,7 @@ public class PlayerMove : MonoBehaviour
 
     // 컴포넌트 참조
     private PlayerStats _playerStats;
+    private PlayerAnimationController _animController;
     private Camera _mainCamera;
 
     // 활성화 상태
@@ -28,10 +29,16 @@ public class PlayerMove : MonoBehaviour
 
     public bool IsActive => _isActive;
 
+    // 애니메이션용 프로퍼티
+    public bool IsGrounded => _characterController != null && _characterController.isGrounded;
+    public float CurrentSpeed { get; private set; }
+    public bool IsSprinting { get; private set; }
+
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
         _playerStats = GetComponent<PlayerStats>();
+        _animController = GetComponent<PlayerAnimationController>();
         _mainCamera = Camera.main;
 
         if (_playerStats == null)
@@ -93,6 +100,7 @@ public class PlayerMove : MonoBehaviour
                 // 1단 점프 (스태미나 소모 X)
                 _yVelocity = JumpPower;
                 _jumpCount = 1;
+                _animController?.TriggerJump();
             }
             else if (_jumpCount == 1 && _playerStats.HasStamina(DoubleJumpStaminaCost))
             {
@@ -101,6 +109,7 @@ public class PlayerMove : MonoBehaviour
                 {
                     _yVelocity = JumpPower;
                     _jumpCount = 2;
+                    _animController?.TriggerJump();
                 }
             }
         }
@@ -136,5 +145,9 @@ public class PlayerMove : MonoBehaviour
         movement.y = _yVelocity;
         
         _characterController.Move(movement * Time.deltaTime);
+
+        // 애니메이션용 프로퍼티 갱신
+        CurrentSpeed = isMoving ? currentSpeed : 0f;
+        IsSprinting = isSprinting;
     }
 }
