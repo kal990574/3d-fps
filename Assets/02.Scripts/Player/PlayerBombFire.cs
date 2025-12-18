@@ -43,7 +43,7 @@ public class PlayerBombFire : MonoBehaviour
 
     private void HandleFireInput()
     {
-        if (InputManager.Instance.RightFirePressed && CanFire())
+        if (InputManager.Instance.BombPressed && CanFire())
         {
             Fire();
         }

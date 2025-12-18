@@ -12,6 +12,9 @@ public class CameraRotate : MonoBehaviour
     [SerializeField] private float _maxPitchNearWall = 30f;
     [SerializeField] private float _pitchLerpSpeed = 10f;
 
+    [Header("References")]
+    [SerializeField] private CameraModeSwitch _modeSwitch;
+
     private float _pitch;
     private float _yaw;
     private float _currentMinPitch;
@@ -23,12 +26,33 @@ public class CameraRotate : MonoBehaviour
     {
         _currentMinPitch = MinVerticalAngle;
         _currentMaxPitch = MaxVerticalAngle;
+
+        if (_modeSwitch == null)
+        {
+            _modeSwitch = GetComponent<CameraModeSwitch>();
+        }
     }
 
     private void Update()
     {
+        if (_modeSwitch != null && _modeSwitch.IsQuarterView)
+        {
+            ApplyQuarterViewRotation();
+            return;
+        }
+
         HandleMouseInput();
         ApplyRotation();
+    }
+
+    private void ApplyQuarterViewRotation()
+    {
+        Vector3 targetRotation = _modeSwitch.QuarterRotation;
+        transform.localRotation = Quaternion.Slerp(
+            transform.localRotation,
+            Quaternion.Euler(targetRotation),
+            Time.deltaTime * 10f
+        );
     }
 
     private void HandleMouseInput()

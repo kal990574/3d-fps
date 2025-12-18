@@ -14,7 +14,8 @@ public class InputManager : MonoBehaviour
     // Combat
     public bool FireHeld => Input.GetMouseButton(0) && !IsPointerOverUI();
     public bool FirePressed => Input.GetMouseButtonDown(0) && !IsPointerOverUI();
-    public bool RightFirePressed => Input.GetMouseButtonDown(1) && !IsPointerOverUI();
+    public bool RightClickPressed => Input.GetMouseButtonDown(1) && !IsPointerOverUI();
+    public bool BombPressed => Input.GetKeyDown(KeyCode.G);
     public bool ReloadPressed => Input.GetKeyDown(KeyCode.R);
 
     // Camera

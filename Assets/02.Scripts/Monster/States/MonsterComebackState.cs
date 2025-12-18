@@ -15,6 +15,17 @@ public class MonsterComebackState : IMonsterState
 
     public void Execute()
     {
+        if (_stateMachine.Movement.IsKnockbackActive)
+        {
+            return;
+        }
+
+        if (_stateMachine.Movement.IsOnOffMeshLink)
+        {
+            _stateMachine.ChangeState(EMonsterState.Jump);
+            return;
+        }
+
         _stateMachine.Movement.MoveTowards(_stateMachine.OriginPosition);
         _stateMachine.Movement.LookAtTarget(_stateMachine.OriginPosition);
 
@@ -28,5 +39,6 @@ public class MonsterComebackState : IMonsterState
 
     public void Exit()
     {
+        _stateMachine.Movement.StopMovement();
     }
 }

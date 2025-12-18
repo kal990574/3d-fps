@@ -39,7 +39,7 @@ public class MonsterCombat : MonoBehaviour
 
     public void ResetAttackTimer()
     {
-        _attackTimer = _attackSpeed;
+        _attackTimer = 0;
     }
 
     public void DealDamageToPlayer()

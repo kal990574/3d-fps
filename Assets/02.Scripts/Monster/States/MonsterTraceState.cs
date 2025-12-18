@@ -15,6 +15,17 @@ public class MonsterTraceState : IMonsterState
 
     public void Execute()
     {
+        if (_stateMachine.Movement.IsKnockbackActive)
+        {
+            return;
+        }
+
+        if (_stateMachine.Movement.IsOnOffMeshLink)
+        {
+            _stateMachine.ChangeState(EMonsterState.Jump);
+            return;
+        }
+
         float distance = _stateMachine.GetDistanceToPlayer();
 
         if (distance > _stateMachine.MaxTraceDistance)
@@ -36,5 +47,6 @@ public class MonsterTraceState : IMonsterState
 
     public void Exit()
     {
+        _stateMachine.Movement.StopMovement();
     }
 }
