@@ -14,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     public float JumpPower = 10f;
     public float DoubleJumpStaminaCost = 25f;
     private int _jumpCount = 0;
+    private bool _isJumping;
 
     // 달리기 관련
     [Header("Sprint")]
@@ -50,6 +51,24 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.LogError("Main Camera not found!");
         }
+
+        if (_animController != null)
+        {
+            _animController.OnJumpExecute += ExecuteJump;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_animController != null)
+        {
+            _animController.OnJumpExecute -= ExecuteJump;
+        }
+    }
+
+    private void ExecuteJump()
+    {
+        _yVelocity = JumpPower;
     }
 
     public void Enable()
@@ -79,11 +98,15 @@ public class PlayerMove : MonoBehaviour
 
         if (isGrounded)
         {
-            _yVelocity = 0;
-            _jumpCount = 0;
+            if (!_isJumping)
+            {
+                _yVelocity = 0;
+                _jumpCount = 0;
+            }
         }
         else
         {
+            _isJumping = false;
             _yVelocity -= Gravity * Time.deltaTime;
         }
 
@@ -97,18 +120,18 @@ public class PlayerMove : MonoBehaviour
         {
             if (_jumpCount == 0)
             {
-                // 1단 점프 (스태미나 소모 X)
-                _yVelocity = JumpPower;
+                // 1단 점프
                 _jumpCount = 1;
+                _isJumping = true;
                 _animController?.TriggerJump();
             }
-            else if (_jumpCount == 1 && _playerStats.HasStamina(DoubleJumpStaminaCost))
+            else if (_jumpCount == 1 && !isGrounded && _playerStats.HasStamina(DoubleJumpStaminaCost))
             {
-                // 2단 점프 (스태미나 소모 O)
+                // 2단 점프
                 if (_playerStats.TryUseStamina(DoubleJumpStaminaCost))
                 {
-                    _yVelocity = JumpPower;
                     _jumpCount = 2;
+                    _isJumping = true;
                     _animController?.TriggerJump();
                 }
             }

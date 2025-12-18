@@ -1,9 +1,12 @@
 using UnityEngine;
+using System;
 
 public class MonsterAnimationController : BaseAnimationController
 {
     private MonsterStateMachine _stateMachine;
     private EMonsterState _previousState;
+
+    public event Action OnAttackExecute;
 
     protected override void Awake()
     {
@@ -45,10 +48,8 @@ public class MonsterAnimationController : BaseAnimationController
             case EMonsterState.Patrol:
             case EMonsterState.Trace:
             case EMonsterState.Comeback:
-                // Idle/Walk는 Speed 파라미터로 Animator Transition이 처리
-                break;
             case EMonsterState.Attack:
-                SetTrigger(AnimatorParams.Attack);
+                // Attack은 TriggerAttackAnimation()
                 break;
             case EMonsterState.Hit:
                 SetTrigger(AnimatorParams.Hit);
@@ -73,5 +74,15 @@ public class MonsterAnimationController : BaseAnimationController
     {
         float speed = _stateMachine.Movement.CurrentSpeed;
         SetFloat(AnimatorParams.Speed, speed);
+    }
+
+    public void AnimEvent_Attack()
+    {
+        OnAttackExecute?.Invoke();
+    }
+
+    public void TriggerAttackAnimation()
+    {
+        SetTrigger(AnimatorParams.Attack);
     }
 }

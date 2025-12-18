@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class PlayerAnimationController : BaseAnimationController
 {
@@ -6,6 +7,9 @@ public class PlayerAnimationController : BaseAnimationController
     private bool _isDead;
 
     private const float MAX_SPEED = 12f;
+
+    public event Action OnJumpExecute;
+    public event Action OnThrowExecute;
 
     protected override void Awake()
     {
@@ -53,5 +57,15 @@ public class PlayerAnimationController : BaseAnimationController
     public void TriggerThrow()
     {
         SetTrigger(AnimatorParams.Throw);
+    }
+
+    public void AnimEvent_Jump()
+    {
+        OnJumpExecute?.Invoke();
+    }
+
+    public void AnimEvent_Throw()
+    {
+        OnThrowExecute?.Invoke();
     }
 }
