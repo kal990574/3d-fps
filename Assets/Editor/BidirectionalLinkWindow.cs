@@ -422,32 +422,35 @@ public class BidirectionalLinkWindow : EditorWindow
     {
         int totalLinks = 0;
 
-        // 인접 레이어 간 링크 생성
-        for (int i = 0; i < layers.Count - 1; i++)
+        // 모든 레이어 조합 간 링크 생성
+        for (int i = 0; i < layers.Count; i++)
         {
-            var lowerLayer = layers[i];
-            var upperLayer = layers[i + 1];
-
-            float heightDiff = upperLayer.CenterHeight - lowerLayer.CenterHeight;
-
-            // 높이 차이 체크
-            if (heightDiff < _generator.minHeightDiff || heightDiff > _generator.maxHeightDiff)
+            for (int j = i + 1; j < layers.Count; j++)
             {
-                continue;
-            }
+                var lowerLayer = layers[i];
+                var upperLayer = layers[j];
 
-            Log($"레이어 {i} (h={lowerLayer.CenterHeight:F1}) ↔ 레이어 {i + 1} (h={upperLayer.CenterHeight:F1}) 연결 시도");
+                float heightDiff = upperLayer.CenterHeight - lowerLayer.CenterHeight;
 
-            // Spatial hash로 최적화된 검색
-            var createdPositions = new HashSet<Vector3Int>();
-
-            foreach (var upperEdge in upperLayer.Edges)
-            {
-                foreach (var lowerEdge in lowerLayer.Edges)
+                // 높이 차이 체크
+                if (heightDiff < _generator.minHeightDiff || heightDiff > _generator.maxHeightDiff)
                 {
-                    if (TryCreateLink(upperEdge, lowerEdge, createdPositions))
+                    continue;
+                }
+
+                Log($"레이어 {i} (h={lowerLayer.CenterHeight:F1}) ↔ 레이어 {j} (h={upperLayer.CenterHeight:F1}) 연결 시도");
+
+                // Spatial hash로 최적화된 검색
+                var createdPositions = new HashSet<Vector3Int>();
+
+                foreach (var upperEdge in upperLayer.Edges)
+                {
+                    foreach (var lowerEdge in lowerLayer.Edges)
                     {
-                        totalLinks++;
+                        if (TryCreateLink(upperEdge, lowerEdge, createdPositions))
+                        {
+                            totalLinks++;
+                        }
                     }
                 }
             }
