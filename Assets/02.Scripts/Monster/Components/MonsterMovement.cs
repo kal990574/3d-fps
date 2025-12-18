@@ -28,6 +28,7 @@ public class MonsterMovement : MonoBehaviour
     private bool _hasValidLinkData;
 
     public float MoveSpeed => _moveSpeed;
+    public float CurrentSpeed => _agent != null ? _agent.velocity.magnitude : 0f;
     public bool IsKnockbackActive => _isKnockbackActive;
     public bool IsJumping => _isJumping;
 
