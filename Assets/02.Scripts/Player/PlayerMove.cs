@@ -100,7 +100,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (!_isJumping)
             {
-                Debug.Log("isGrounded");
+                //Debug.Log("isGrounded");
                 _yVelocity = 0;
                 _jumpCount = 0;
             }

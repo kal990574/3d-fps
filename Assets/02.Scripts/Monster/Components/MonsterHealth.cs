@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class MonsterHealth : MonoBehaviour, IDamageable
 {
-    private const float MaxHealth = 200f;
-    private const float DeathDelay = 0.1f;
+    [Header("Health Settings")]
+    [SerializeField] private float _maxHealth = 200f;
+    [SerializeField] private float _deathDelay = 0.1f;
 
-    public float CurrentHealth { get; private set; } = MaxHealth;
+    public float MaxHealth => _maxHealth;
+    public float CurrentHealth { get; private set; }
     public bool IsDead => CurrentHealth <= 0;
 
     public event Action<float, float> OnHealthChanged;
     public event Action<Vector3, float> OnDamaged;
     public event Action OnDeath;
 
+    private void Awake()
+    {
+        CurrentHealth = _maxHealth;
+    }
+
     private void Start()
     {
-        OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
+        OnHealthChanged?.Invoke(CurrentHealth, _maxHealth);
     }
 
     public void TakeDamage(DamageInfo damageInfo)
@@ -27,7 +34,7 @@ public class MonsterHealth : MonoBehaviour, IDamageable
         }
 
         CurrentHealth -= damageInfo.Damage;
-        OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
+        OnHealthChanged?.Invoke(CurrentHealth, _maxHealth);
 
         if (CurrentHealth > 0)
         {
@@ -44,7 +51,7 @@ public class MonsterHealth : MonoBehaviour, IDamageable
 
     private IEnumerator DeathCoroutine()
     {
-        yield return new WaitForSeconds(DeathDelay);
+        yield return new WaitForSeconds(_deathDelay);
         Destroy(gameObject);
     }
 }

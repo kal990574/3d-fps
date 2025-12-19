@@ -74,7 +74,7 @@ public class MonsterMovement : MonoBehaviour
         {
             return;
         }
-
+        Debug.Log("hi");
         _agent.speed = _moveSpeed * speedMultiplier;
         _agent.SetDestination(target);
     }
