@@ -100,6 +100,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (!_isJumping)
             {
+                Debug.Log("isGrounded");
                 _yVelocity = 0;
                 _jumpCount = 0;
             }
@@ -118,15 +119,18 @@ public class PlayerMove : MonoBehaviour
         // 2. 점프 처리
         if (InputManager.Instance.JumpPressed)
         {
+            Debug.Log(_jumpCount);
             if (_jumpCount == 0)
             {
                 // 1단 점프
                 _jumpCount = 1;
+                Debug.Log("Jump");
                 _isJumping = true;
                 _animController?.TriggerJump();
             }
-            else if (_jumpCount == 1 && !isGrounded && _playerStats.HasStamina(DoubleJumpStaminaCost))
+            else if (_jumpCount == 1 && _playerStats.HasStamina(DoubleJumpStaminaCost))
             {
+                Debug.Log("DoubleJump");
                 // 2단 점프
                 if (_playerStats.TryUseStamina(DoubleJumpStaminaCost))
                 {
