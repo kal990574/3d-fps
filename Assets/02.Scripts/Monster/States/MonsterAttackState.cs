@@ -29,7 +29,7 @@ public class MonsterAttackState : IMonsterState
 
         if (_stateMachine.Combat.CanAttack())
         {
-            _stateMachine.Combat.DealDamageToPlayer();
+            _stateMachine.Combat.TriggerAttack();
         }
     }
 

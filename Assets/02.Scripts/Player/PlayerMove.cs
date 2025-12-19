@@ -14,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     public float JumpPower = 10f;
     public float DoubleJumpStaminaCost = 25f;
     private int _jumpCount = 0;
+    private bool _isJumping;
 
     // 달리기 관련
     [Header("Sprint")]
@@ -21,6 +22,7 @@ public class PlayerMove : MonoBehaviour
 
     // 컴포넌트 참조
     private PlayerStats _playerStats;
+    private PlayerAnimationController _animController;
     private Camera _mainCamera;
 
     // 활성화 상태
@@ -28,10 +30,16 @@ public class PlayerMove : MonoBehaviour
 
     public bool IsActive => _isActive;
 
+    // 애니메이션용 프로퍼티
+    public bool IsGrounded => _characterController != null && _characterController.isGrounded;
+    public float CurrentSpeed { get; private set; }
+    public bool IsSprinting { get; private set; }
+
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
         _playerStats = GetComponent<PlayerStats>();
+        _animController = GetComponent<PlayerAnimationController>();
         _mainCamera = Camera.main;
 
         if (_playerStats == null)
@@ -43,6 +51,24 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.LogError("Main Camera not found!");
         }
+
+        if (_animController != null)
+        {
+            _animController.OnJumpExecute += ExecuteJump;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_animController != null)
+        {
+            _animController.OnJumpExecute -= ExecuteJump;
+        }
+    }
+
+    private void ExecuteJump()
+    {
+        _yVelocity = JumpPower;
     }
 
     public void Enable()
@@ -72,11 +98,16 @@ public class PlayerMove : MonoBehaviour
 
         if (isGrounded)
         {
-            _yVelocity = 0;
-            _jumpCount = 0;
+            if (!_isJumping)
+            {
+                Debug.Log("isGrounded");
+                _yVelocity = 0;
+                _jumpCount = 0;
+            }
         }
         else
         {
+            _isJumping = false;
             _yVelocity -= Gravity * Time.deltaTime;
         }
 
@@ -88,19 +119,24 @@ public class PlayerMove : MonoBehaviour
         // 2. 점프 처리
         if (InputManager.Instance.JumpPressed)
         {
+            Debug.Log(_jumpCount);
             if (_jumpCount == 0)
             {
-                // 1단 점프 (스태미나 소모 X)
-                _yVelocity = JumpPower;
+                // 1단 점프
                 _jumpCount = 1;
+                Debug.Log("Jump");
+                _isJumping = true;
+                _animController?.TriggerJump();
             }
             else if (_jumpCount == 1 && _playerStats.HasStamina(DoubleJumpStaminaCost))
             {
-                // 2단 점프 (스태미나 소모 O)
+                Debug.Log("DoubleJump");
+                // 2단 점프
                 if (_playerStats.TryUseStamina(DoubleJumpStaminaCost))
                 {
-                    _yVelocity = JumpPower;
                     _jumpCount = 2;
+                    _isJumping = true;
+                    _animController?.TriggerJump();
                 }
             }
         }
@@ -136,5 +172,9 @@ public class PlayerMove : MonoBehaviour
         movement.y = _yVelocity;
         
         _characterController.Move(movement * Time.deltaTime);
+
+        // 애니메이션용 프로퍼티 갱신
+        CurrentSpeed = isMoving ? currentSpeed : 0f;
+        IsSprinting = isSprinting;
     }
 }

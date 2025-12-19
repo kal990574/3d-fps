@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerGunFire : MonoBehaviour
@@ -8,6 +10,7 @@ public class PlayerGunFire : MonoBehaviour
     [SerializeField] private ParticleSystem _hitEffect;
     [SerializeField] private CameraRotate _cameraRotate;
     [SerializeField] private CameraShake _cameraShake;
+    [SerializeField] private List<GameObject> _muzzleEffects;
 
     [Header("Recoil Settings")]
     [SerializeField] private Recoil _recoil = new Recoil();
@@ -20,10 +23,12 @@ public class PlayerGunFire : MonoBehaviour
     [SerializeField] private float _fireTrauma = 0.2f;
 
     private Camera _mainCamera;
+    private PlayerAnimationController _animController;
 
     private void Start()
     {
         _mainCamera = Camera.main;
+        _animController = GetComponent<PlayerAnimationController>();
     }
 
     private void Update()
@@ -40,7 +45,17 @@ public class PlayerGunFire : MonoBehaviour
             PerformRaycast();
             ApplyRecoil();
             ApplyShake();
+            _animController?.TriggerShot();
+            StartCoroutine(MuzzleFlash_Coroutine());
         }
+    }
+
+    private IEnumerator MuzzleFlash_Coroutine()
+    {
+        GameObject muzzleEffect = _muzzleEffects[Random.Range(0, _muzzleEffects.Count)];
+        muzzleEffect.SetActive(true);
+        yield return new WaitForSeconds(0.05f);
+        muzzleEffect.SetActive(false);
     }
 
     private void ApplyRecoil()

@@ -11,16 +11,39 @@ public class PlayerBombFire : MonoBehaviour
 
     private float _nextFireTime;
     private Camera _mainCamera;
+    private PlayerAnimationController _animController;
+
+    private bool _isThrowPending;
+    private Vector3 _pendingDirection;
 
     private void Start()
     {
         CacheMainCamera();
+        CacheAnimController();
         ValidateReferences();
     }
 
     private void CacheMainCamera()
     {
         _mainCamera = Camera.main;
+    }
+
+    private void CacheAnimController()
+    {
+        _animController = GetComponent<PlayerAnimationController>();
+
+        if (_animController != null)
+        {
+            _animController.OnThrowExecute += ExecuteThrow;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_animController != null)
+        {
+            _animController.OnThrowExecute -= ExecuteThrow;
+        }
     }
 
     private void ValidateReferences()
@@ -56,16 +79,28 @@ public class PlayerBombFire : MonoBehaviour
 
     private void Fire()
     {
-        Bomb bomb = GameplayPoolManager.Instance?.GetBomb(_firePoint.position);
+        _isThrowPending = true;
+        _pendingDirection = _mainCamera.transform.forward;
 
-        if (bomb == null)
+        ApplyCooldown();
+        _animController?.TriggerThrow();
+    }
+
+    private void ExecuteThrow()
+    {
+        if (!_isThrowPending)
         {
             return;
         }
 
-        Vector3 fireDirection = _mainCamera.transform.forward;
-        bomb.Launch(fireDirection, _throwForce);
-        ApplyCooldown();
+        Bomb bomb = GameplayPoolManager.Instance?.GetBomb(_firePoint.position);
+
+        if (bomb != null)
+        {
+            bomb.Launch(_pendingDirection, _throwForce);
+        }
+
+        _isThrowPending = false;
     }
 
     private void ApplyCooldown()
