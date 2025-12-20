@@ -11,6 +11,10 @@ public class PlayerGunFire : MonoBehaviour
     [SerializeField] private CameraRotate _cameraRotate;
     [SerializeField] private CameraShake _cameraShake;
     [SerializeField] private List<GameObject> _muzzleEffects;
+    
+    private EZoomMode _zoomMode = EZoomMode.Normal;
+    [SerializeField] private GameObject _normalCrosshair;
+    [SerializeField] private GameObject _zoomInCrosshair;
 
     [Header("Recoil Settings")]
     [SerializeField] private Recoil _recoil = new Recoil();
@@ -35,6 +39,23 @@ public class PlayerGunFire : MonoBehaviour
     {
         HandleFireInput();
         HandleReloadInput();
+        ZoomModeCheck();
+    }
+
+    private void ZoomModeCheck()
+    {
+        if (InputManager.Instance.RightClickHeld)
+        {
+            _zoomMode = EZoomMode.ZoomIn;
+            _normalCrosshair.SetActive(false);
+            _zoomInCrosshair.SetActive(true);
+        }
+        else
+        {
+            _zoomMode = EZoomMode.Normal;
+            _normalCrosshair.SetActive(true);
+            _zoomInCrosshair.SetActive(false);
+        }
     }
 
     private void HandleFireInput()
