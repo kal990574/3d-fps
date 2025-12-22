@@ -140,6 +140,15 @@ public class GameManager : MonoBehaviour
                 monster.enabled = isEnabled;
             }
         }
+
+        EliteMonsterStateMachine[] eliteMonsters = FindObjectsByType<EliteMonsterStateMachine>(FindObjectsSortMode.None);
+        foreach (var eliteMonster in eliteMonsters)
+        {
+            if (eliteMonster != null)
+            {
+                eliteMonster.enabled = isEnabled;
+            }
+        }
     }
 
     private IEnumerator StartToPlay_Coroutine()
