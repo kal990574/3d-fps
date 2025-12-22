@@ -46,11 +46,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _magnetSpeed: 8
-  _magnetRange: 10
+  _magnetRange: 8
   _collectDistance: 0.5
   _initialUpwardForce: 10
   _gravity: 15
   _groundHeight: 1
+  _rotationSpeed: 270
 --- !u!1 &1667978803413412
 GameObject:
   m_ObjectHideFlags: 0

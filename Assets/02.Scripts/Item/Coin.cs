@@ -12,6 +12,9 @@ public class Coin : MonoBehaviour, IPoolable
     [SerializeField] private float _gravity = 15f;
     [SerializeField] private float _groundHeight = 0.5f;
 
+    [Header("Rotation Settings")]
+    [SerializeField] private float _rotationSpeed = 180f;
+
     private Transform _playerTransform;
     private Vector3 _velocity;
     private bool _isGrounded;
@@ -29,6 +32,8 @@ public class Coin : MonoBehaviour, IPoolable
             return;
         }
 
+        Rotate();
+
         if (_playerTransform == null)
         {
             FindPlayer();
@@ -43,6 +48,11 @@ public class Coin : MonoBehaviour, IPoolable
         {
             TryMagnetToPlayer();
         }
+    }
+
+    private void Rotate()
+    {
+        transform.Rotate(0f, 0f, _rotationSpeed * Time.deltaTime);
     }
 
     private void FindPlayer()
