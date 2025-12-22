@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class EliteMonsterCombat : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class EliteMonsterCombat : MonoBehaviour
     public float AttackDistance => _attackDistance;
     public float AttackRadius => _attackRadius;
 
-    public event System.Action OnAttackComplete;
+    public event Action OnAttackComplete;
 
     private void Start()
     {

@@ -1620,6 +1620,10 @@ MonoBehaviour:
     Prefab: {fileID: 4839941086019710063, guid: 88639bfebb608cc4b82776c2e0b51ebc, type: 3}
     InitialSize: 5
     MaxSize: 5
+  - Name: Coin
+    Prefab: {fileID: 1498403948531744, guid: 5e3cb2c9e593f684bbb56f4fe01bb78b, type: 3}
+    InitialSize: 20
+    MaxSize: 100
 --- !u!1 &370283898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2647,11 +2651,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &650478590 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 437422540949733766, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
-  m_PrefabInstance: {fileID: 2117123274}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &659708101
 GameObject:
   m_ObjectHideFlags: 0
@@ -4689,6 +4688,14 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 894035851}
+    - target: {fileID: 4944844060823937818, guid: d86794dbfc5b840048cdd74eca6b2e58, type: 3}
+      propertyPath: _maxCoinDrop
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944844060823937818, guid: d86794dbfc5b840048cdd74eca6b2e58, type: 3}
+      propertyPath: _minCoinDrop
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5760612341417468079, guid: d86794dbfc5b840048cdd74eca6b2e58, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.9980805
@@ -8356,42 +8363,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2663382662090493087, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
+      propertyPath: _maxCoinDrop
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2663382662090493087, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
+      propertyPath: _minCoinDrop
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 437422540949733766, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2117123295}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
 --- !u!4 &2117123275 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 962039514350394172, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
   m_PrefabInstance: {fileID: 2117123274}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &2117123295
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650478590}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 10
-  m_Height: 45
-  m_Direction: 1
-  m_Center: {x: 0, y: 22.5, z: 0}
 --- !u!1 &2135811052
 GameObject:
   m_ObjectHideFlags: 0
@@ -8631,6 +8620,10 @@ PrefabInstance:
       propertyPath: _cameraModeSwitch
       value: 
       objectReference: {fileID: 330585550}
+    - target: {fileID: 4069204468482278185, guid: 78114e439ad0c0c489001138c22990da, type: 3}
+      propertyPath: _damage
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4171201832200922133, guid: 78114e439ad0c0c489001138c22990da, type: 3}
       propertyPath: m_Layer
       value: 0

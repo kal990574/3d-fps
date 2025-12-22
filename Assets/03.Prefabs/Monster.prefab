@@ -211,6 +211,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _knockbackDistance: 2
+  _minCoinDrop: 3
+  _maxCoinDrop: 5
 --- !u!143 &3657013618593052023
 CharacterController:
   m_ObjectHideFlags: 0
@@ -263,6 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54fa7839514d2453bb100b788ba75a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 200
+  _deathDelay: 2
 --- !u!114 &5563690554507476127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +311,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2319844064543305143}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -1372625422
   m_Radius: 0.5
   m_Speed: 5
   m_Acceleration: 8

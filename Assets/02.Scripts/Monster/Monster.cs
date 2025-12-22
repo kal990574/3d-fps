@@ -5,6 +5,10 @@ public class Monster : MonoBehaviour
     [Header("Knockback Settings")]
     [SerializeField] private float _knockbackDistance = 2f;
 
+    [Header("Coin Drop")]
+    [SerializeField] private int _minCoinDrop = 1;
+    [SerializeField] private int _maxCoinDrop = 3;
+
     private MonsterStateMachine _stateMachine;
     private MonsterHealth _health;
 
@@ -62,6 +66,9 @@ public class Monster : MonoBehaviour
         {
             _stateMachine.ChangeState(EMonsterState.Death);
         }
+
+        int coinCount = Random.Range(_minCoinDrop, _maxCoinDrop + 1);
+        CoinSpawner.SpawnCoins(transform.position, coinCount);
     }
 
     private Vector3 CalculateKnockbackDirection(Vector3 damageSourcePosition)

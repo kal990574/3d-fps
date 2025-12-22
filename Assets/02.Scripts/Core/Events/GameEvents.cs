@@ -11,6 +11,9 @@ public static class GameEvents
     // Bomb Pool Events
     public static event Action<int, int> OnBombCountChanged;   // (available, max)
 
+    // Coin Events
+    public static event Action<int> OnCoinCollected;           // (coinAmount)
+
     // Game State Events
     public static event Action<EGameState> OnGameStateChanged;
     public static event Action OnGamePaused;
@@ -31,6 +34,9 @@ public static class GameEvents
 
     public static void TriggerBombCountChanged(int available, int max)
         => OnBombCountChanged?.Invoke(available, max);
+
+    public static void TriggerCoinCollected(int amount)
+        => OnCoinCollected?.Invoke(amount);
 
     public static void TriggerGameStateChanged(EGameState newState)
         => OnGameStateChanged?.Invoke(newState);

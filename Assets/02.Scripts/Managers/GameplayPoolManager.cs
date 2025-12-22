@@ -79,6 +79,20 @@ public class GameplayPoolManager : PoolManagerBase<Transform>
         }
     }
 
+    public Coin SpawnCoin(Vector3 position)
+    {
+        Transform obj = Get("Coin", position);
+        return obj != null ? obj.GetComponent<Coin>() : null;
+    }
+
+    public void ReleaseCoin(Coin coin)
+    {
+        if (coin != null)
+        {
+            Release("Coin", coin.transform);
+        }
+    }
+
     private void OnDestroy()
     {
         if (Instance == this)
