@@ -54,8 +54,10 @@ public class EliteMonster : MonoBehaviour
 
         if (knockbackDistance > 0f)
         {
-            _stateMachine.Movement.ApplyKnockback(knockbackDirection, knockbackDistance);
+            _stateMachine.SetPendingKnockback(knockbackDirection, knockbackDistance);
         }
+
+        _stateMachine.ChangeState(EEliteMonsterState.HitStun);
     }
 
     private void HandleDeath()

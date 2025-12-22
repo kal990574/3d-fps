@@ -48,6 +48,10 @@ public class EliteMonsterAnimationController : BaseAnimationController
             case EEliteMonsterState.Trace:
             case EEliteMonsterState.Attack:
                 break;
+            case EEliteMonsterState.HitStun:
+                ResetTrigger(AnimatorParams.Hit);
+                SetTrigger(AnimatorParams.Hit);
+                break;
             case EEliteMonsterState.Death:
                 SetBool(AnimatorParams.IsDead, true);
                 break;
@@ -73,5 +77,11 @@ public class EliteMonsterAnimationController : BaseAnimationController
     public void TriggerAttackAnimation()
     {
         SetTrigger(AnimatorParams.Attack);
+    }
+
+    public void TriggerHitAnimation()
+    {
+        ResetTrigger(AnimatorParams.Hit);
+        SetTrigger(AnimatorParams.Hit);
     }
 }

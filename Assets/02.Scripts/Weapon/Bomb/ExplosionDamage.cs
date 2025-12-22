@@ -14,7 +14,8 @@ public static class ExplosionDamage
             IDamageable damageable = hit.GetComponent<IDamageable>();
             if (damageable != null)
             {
-                float distance = Vector3.Distance(data.Position, hit.transform.position);
+                Vector3 closestPoint = hit.ClosestPoint(data.Position);
+                float distance = Vector3.Distance(data.Position, closestPoint);
                 float damagePercent = 1 - (distance / data.Radius);
                 float finalDamage = data.MaxDamage * Mathf.Clamp01(damagePercent);
 

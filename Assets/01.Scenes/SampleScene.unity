@@ -2647,6 +2647,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &650478590 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 437422540949733766, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
+  m_PrefabInstance: {fileID: 2117123274}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &659708101
 GameObject:
   m_ObjectHideFlags: 0
@@ -8351,36 +8356,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1865796293746845711, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4178676532751563139, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4674965157342972896, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4682567991916819797, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 8686305876641681386, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 3000
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 437422540949733766, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2117123295}
   m_SourcePrefab: {fileID: 100100000, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
 --- !u!4 &2117123275 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 962039514350394172, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
   m_PrefabInstance: {fileID: 2117123274}
   m_PrefabAsset: {fileID: 0}
+--- !u!136 &2117123295
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650478590}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 10
+  m_Height: 45
+  m_Direction: 1
+  m_Center: {x: 0, y: 22.5, z: 0}
 --- !u!1 &2135811052
 GameObject:
   m_ObjectHideFlags: 0

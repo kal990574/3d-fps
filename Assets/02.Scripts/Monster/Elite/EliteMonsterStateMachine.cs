@@ -14,6 +14,7 @@ public class EliteMonsterStateMachine : MonoBehaviour
     private MonsterHealth _health;
     private EliteMonsterMovement _movement;
     private EliteMonsterCombat _combat;
+    private EliteMonsterAnimationController _animController;
 
     private GameObject _player;
     private Transform _playerTransform;
@@ -24,11 +25,13 @@ public class EliteMonsterStateMachine : MonoBehaviour
 
     public float DetectDistance => _detectDistance;
 
-
+    public Vector3 PendingKnockbackDirection { get; private set; }
+    public float PendingKnockbackDistance { get; private set; }
 
     public MonsterHealth Health => _health;
     public EliteMonsterMovement Movement => _movement;
     public EliteMonsterCombat Combat => _combat;
+    public EliteMonsterAnimationController AnimationController => _animController;
     public Transform PlayerTransform => _playerTransform;
 
     private void Awake()
@@ -36,6 +39,7 @@ public class EliteMonsterStateMachine : MonoBehaviour
         _health = GetComponent<MonsterHealth>();
         _movement = GetComponent<EliteMonsterMovement>();
         _combat = GetComponent<EliteMonsterCombat>();
+        _animController = GetComponent<EliteMonsterAnimationController>();
     }
 
     private void Start()
@@ -75,6 +79,7 @@ public class EliteMonsterStateMachine : MonoBehaviour
             EEliteMonsterState.Idle => new EliteIdleState(this),
             EEliteMonsterState.Trace => new EliteTraceState(this),
             EEliteMonsterState.Attack => new EliteAttackState(this),
+            EEliteMonsterState.HitStun => new EliteHitStunState(this),
             EEliteMonsterState.Death => new EliteDeadState(this),
             _ => new EliteIdleState(this)
         };
@@ -112,5 +117,15 @@ public class EliteMonsterStateMachine : MonoBehaviour
         _lastAttackTime = Time.time;
     }
 
+    public void SetPendingKnockback(Vector3 direction, float distance)
+    {
+        PendingKnockbackDirection = direction;
+        PendingKnockbackDistance = distance;
+    }
 
+    public void ClearPendingKnockback()
+    {
+        PendingKnockbackDirection = Vector3.zero;
+        PendingKnockbackDistance = 0f;
+    }
 }
