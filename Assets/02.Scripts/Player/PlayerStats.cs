@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class PlayerStats : MonoBehaviour, IDamageable
 {
@@ -18,7 +19,6 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _currentHealth = MaxHealth;
         _currentStamina = MaxStamina;
 
-        // 초기 상태 이벤트 발행
         GameEvents.TriggerHealthChanged(_currentHealth, MaxHealth);
         GameEvents.TriggerStaminaChanged(_currentStamina, MaxStamina);
     }

@@ -9850,19 +9850,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 962039514350394172, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.43811357
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 962039514350394172, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 962039514350394172, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.89891964
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 962039514350394172, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 962039514350394172, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9870,23 +9870,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 962039514350394172, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 231.967
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 962039514350394172, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8163839954555025909, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
-      propertyPath: _attackDamage
-      value: 20
+    - target: {fileID: 2663382662090493087, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
+      propertyPath: _maxCoinDrop
+      value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 8163839954555025909, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
-      propertyPath: _attackRadius
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8163839954555025909, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
-      propertyPath: _attackDistance
-      value: 20
+    - target: {fileID: 2663382662090493087, guid: 8340f60b060be44b08b5fc8c98db0c63, type: 3}
+      propertyPath: _minCoinDrop
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

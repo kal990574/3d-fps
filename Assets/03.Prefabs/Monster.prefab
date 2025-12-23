@@ -211,8 +211,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _knockbackDistance: 2
-  _minCoinDrop: 3
-  _maxCoinDrop: 5
+  _minCoinDrop: 5
+  _maxCoinDrop: 10
 --- !u!143 &3657013618593052023
 CharacterController:
   m_ObjectHideFlags: 0
