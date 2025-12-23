@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI _stateTextUI;
+    [SerializeField] private OptionPopupUI _optionPopupUI;
 
     [Header("Core References")]
     [SerializeField] private GameObject _player;
@@ -55,6 +57,11 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         HandleCursorLock();
+        if (InputManager.Instance.EscapePressed)
+        {
+            Time.timeScale = 0f;
+            _optionPopupUI.Show();
+        }
     }
 
     private void OnDestroy()
@@ -180,5 +187,23 @@ public class GameManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    public void Continue()
+    {
+        Time.timeScale = 1f;
+    }
+    public void Restart()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
+    }
+    public void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+      Application.Quit();
+#endif
     }
 }
