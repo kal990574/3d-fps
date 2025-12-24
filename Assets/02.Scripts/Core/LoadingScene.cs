@@ -22,7 +22,8 @@ public class LoadingScene : MonoBehaviour
         while (!ao.isDone)
         {
             _progressSlider.value = ao.progress;
-            _progressText.text = ao.progress + "%";
+            _progressText.text = $"{ao.progress*100}%";
+            Debug.Log(ao.progress);
             if (ao.progress >= 0.9f)
             {
                 ao.allowSceneActivation = true;
